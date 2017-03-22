@@ -1,8 +1,12 @@
 package planner.db;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import planner.model.Staff;
 import planner.model.Student;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Static Star Planner database class keeping track of
@@ -18,10 +22,20 @@ public class PlannerData {
 	
 	/**
 	 * Initialise list of students
+	 * @throws ParseException 
 	 */
-	public static void initStudents(){
+	@SuppressWarnings("null")
+	public static void initStudents() throws ParseException{
 		ArrayList<Student> students = new ArrayList<Student>();
-		students.add(new Student("U1521000E", 'M', "Singaporean"));	
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Date startDate = dateFormat.parse("19/4/2017 19:50");
+		Date endDate = dateFormat.parse("21/4/2017 19:50");
+		Calendar accessStart = Calendar.getInstance();
+		accessStart.setTime(startDate);
+		Calendar accessEnd = Calendar.getInstance();
+		accessEnd.setTime(endDate);
+		
+		students.add(new Student("Michelle", "Tan", "U1521000E", 'M', "Singaporean", accessStart, accessEnd));	
 		PlannerData.students = students;
 	}
 	
