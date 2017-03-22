@@ -24,8 +24,8 @@ public class UserAcc implements Serializable{
 	/**
 	//The first and last name of the user 
 	 */
-	private String firstName;
-	private String lastName;
+	protected String firstName;
+	protected String lastName;
 	
 	/**
 	 * Change the username of the user
