@@ -1,7 +1,7 @@
 package planner.model;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  * Represents the Student who acts as the user of the 
@@ -33,9 +33,14 @@ public class Student extends UserAcc implements Serializable{
 	private String nationality;
 	
 	/**
-	//The specific access period of the student
+	//The start of the access period of the student
 	 */
-	private Date accessPeriod;
+	private Calendar accessStart;
+	
+	/**
+	//The end of the access period of the student
+	 */
+	private Calendar accessEnd;
 	
 	/**
 	//List of all courses registered by the student
@@ -48,10 +53,14 @@ public class Student extends UserAcc implements Serializable{
 	 * @param gender
 	 * @param nationality
 	 */	
-	public Student (String matricNumber, char gender, String nationality) {
-		this.matricNumber	= matricNumber;
-		this.gender			= gender;
-		this.nationality	= nationality;
+	public Student (String firstName, String lastName, String matricNumber, char gender, String nationality, Calendar accessStart, Calendar accessEnd) {
+		this.firstName 			= firstName;
+		this.lastName 			= lastName;
+		this.matricNumber		= matricNumber;
+		this.gender				= gender;
+		this.nationality		= nationality;
+		this.accessStart 		= accessStart;
+		this.accessEnd 			= accessEnd;
 	}
 	
 	/**
@@ -73,10 +82,16 @@ public class Student extends UserAcc implements Serializable{
 	public void setNationality(String nationality){ this.nationality = nationality; }
 	
 	/**
-	 * Change the access period of the student
+	 * Change the starting access period of the student
 	 * @param accessPeriod
 	 */
-	public void setAccessPeriod(Date accessPeriod){ this.accessPeriod = accessPeriod; }
+	public void setAccessStart(Calendar accessStart){ this.accessStart = accessStart; }
+	
+	/**
+	 * Change the end access period of the student
+	 * @param accessPeriod
+	 */
+	public void setAccessEnd(Calendar accessEnd){ this.accessEnd = accessEnd; }
 	
 	/**
 	 * Get the matric number of the student
@@ -97,11 +112,16 @@ public class Student extends UserAcc implements Serializable{
 	public String getNationality(){ return this.nationality; }
 	
 	/**
-	 * Get the access period of the student
+	 * Get the starting access period of the student
 	 * @return this accessPeriod
 	 */
-	public Date getAccessPeriod(){ return this.accessPeriod; }
+	public Calendar getAccessStart(){ return this.accessStart; }
 	
+	/**
+	 * Get the ending access period of the student
+	 * @return this accessPeriod
+	 */
+	public Calendar getAccessEnd(){ return this.accessEnd; }
 	
 	
 	
