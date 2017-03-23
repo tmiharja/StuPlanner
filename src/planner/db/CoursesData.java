@@ -88,7 +88,7 @@ public class CoursesData {
 				int hour = ExamDate.get(Calendar.HOUR_OF_DAY);
 			    int minute = ExamDate.get(Calendar.MINUTE);
 			    
-			    String ExamDateS = String.format("%02d/%02d/%4d %02d:%02d", year, month+1, day, hour, minute);
+			    String ExamDateS = String.format("%02d/%02d/%4d %02d:%02d", day, month+1, year, hour, minute);
 				
 				stringBuild.append(ExamDateS);
 

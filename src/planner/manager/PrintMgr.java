@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import planner.model.Course;
 import planner.model.CourseList;
 import planner.model.Index;
-import planner.model.IndexList;
 import planner.model.Student;
 import planner.model.StudentList;
 
