@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 
 import planner.model.Account;
 
-public class TextDB {
+public class AccountData {
 	public static final String SEPARATOR = "|";
 
 	// an example of reading
@@ -35,6 +35,28 @@ public class TextDB {
 		}
 		return alr;
 	}
+	
+	public static ArrayList readStudents(String filename) throws IOException {
+		// read String from text file
+		ArrayList stringArray = (ArrayList)read(filename);
+		ArrayList alr = new ArrayList() ;// to store Students data
+
+        for (int i = 0 ; i < stringArray.size() ; i++) {
+				String st = (String)stringArray.get(i);
+				// get individual 'fields' of the string separated by SEPARATOR
+				StringTokenizer star = new StringTokenizer(st , SEPARATOR);	// pass in the string to the string tokenizer using delimiter "," 
+				String  name = star.nextToken().trim();	// first token
+				String  matricNum = star.nextToken().trim();	// second token
+				char gender = (star.nextToken().trim()).charAt(0); // third token
+				String nationality = star.nextToken().trim();
+				//CourseList courseList = star.nextToken().trim());
+				// create Professor object from file data
+				Student std = new Student(name, matricNum, gender, nationality); 
+				// add to Professors list
+				alr.add(std) ;
+			}
+			return alr ;
+	}
 
 	// an example of saving
 	public static void saveAccounts(String filename, List al) throws IOException {
@@ -52,6 +74,25 @@ public class TextDB {
 		}
 		write(filename, alw);
 	}
+	
+	// an example of saving
+	public static void saveStudents(String filename, List al) throws IOException {
+			List alw = new ArrayList() ;// to store Studetns data
+
+	        for (int i = 0 ; i < al.size() ; i++) {
+					Student std = (Student)al.get(i);
+					StringBuilder st =  new StringBuilder() ;
+					st.append(std.getName().trim());
+					st.append(SEPARATOR);
+					st.append(std.getMatNum().trim());
+					st.append(SEPARATOR);
+					st.append(std.getGender());
+					st.append(SEPARATOR);
+					st.append(std.getNationality());
+					alw.add(st.toString()) ;
+				}
+				write(filename,alw);
+		}
 
 	/** Write fixed content to the given file. */
 	public static void write(String fileName, List data) throws IOException {

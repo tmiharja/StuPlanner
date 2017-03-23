@@ -8,7 +8,7 @@ import java.util.Scanner;
 import planner.UI.StaffUI;
 import planner.UI.StudentUI;
 import planner.db.PlannerData;
-import planner.db.TextDB;
+import planner.db.AccountData;
 import planner.model.Account;
 
 public class MainApp {
@@ -24,7 +24,7 @@ public class MainApp {
 
 			try {
 				// read file containing Account records.
-				ArrayList list = TextDB.readAccounts(filename);
+				ArrayList list = AccountData.readAccounts(filename);
 				Scanner sc = new Scanner(System.in);
 
 				mainLoop: 
