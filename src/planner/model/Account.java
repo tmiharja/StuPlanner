@@ -13,6 +13,7 @@ public class Account implements Serializable {
 		this.accountType = accountType ;
 		this.salt = salt;
 	}
+	
 	public String getUsername() { 
 		return username; 
 	}

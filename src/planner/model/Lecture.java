@@ -1,5 +1,6 @@
 package planner.model;
 
-public class Lecture {
+public class Lecture extends Lesson{
+	
 
 }

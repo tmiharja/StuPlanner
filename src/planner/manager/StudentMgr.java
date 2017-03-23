@@ -1,15 +1,6 @@
 package planner.manager;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Scanner;
-
-import planner.db.AccountData;
-import planner.db.StudentData;
-import planner.model.Account;
 import planner.model.Student;
 import planner.model.StudentList;
 
@@ -24,8 +15,6 @@ public class StudentMgr {
 	
 	//static ArrayList<Student> students = StudentList.getStudents();
 	static String filename = "src/planner/db/students.txt";
-	
-	private static Scanner sc = new Scanner(System.in);	
 	
 	/**
 	 * Create a new student having the all necessary information.

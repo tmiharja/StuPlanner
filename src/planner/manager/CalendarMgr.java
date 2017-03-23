@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
+
 public class CalendarMgr {
 	
 	static Scanner sc = new Scanner(System.in);
@@ -31,6 +32,7 @@ public class CalendarMgr {
 	 * Prompt user to give a valid access period
 	 * @return the VALID reservation date time
 	 */
+
 	@SuppressWarnings("null")
 	public static Calendar getValidDateTime(String date){
 
@@ -43,14 +45,16 @@ public class CalendarMgr {
 		    	parsedDate = dateFormat.parse(date);
 		    	 
 		    } catch (ParseException e) {
-		        System.out.println("Entered access time is not in the correct format!");
+		        System.out.println("Input is not in the correct format!");
 		        continue;
 		    }
 		    newDate.setTime(parsedDate);
+
 		    validDate = true;
 
 		} while(!validDate);
 				
 		return newDate;
 	}
+
 }

@@ -6,12 +6,26 @@ import java.util.*;
 import planner.UI.StaffUI;
 import planner.UI.StudentUI;
 import planner.db.PlannerData;
+import planner.db.AccountData;
+import planner.db.CoursesData;
 import planner.manager.UserValidationMgr;
 import planner.model.Account;
 
 public class MainApp {
 
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) throws ParseException, IOException {
+		
+		CoursesData.initCourses();
+		
+		StaffUI.showStaffOption();
+		
+		
+		
+
+		// TODO Auto-generated method stub
+		PlannerData.initStudents();
+		StaffUI.showStaffOption();  
+
 		do {
 			String username;
 			String password;
@@ -19,11 +33,12 @@ public class MainApp {
 			int choice = 0;
 			Account loggedInAcc;
 
-			Scanner sc = new Scanner(System.in);
+            Scanner sc = new Scanner(System.in);
 			
 			mainLoop: 
 			while (true) {
 				domainLoop:
+                
 				while(true){
 					System.out.println("********Select Domain********");
 					System.out.println("(1) Student");
@@ -74,5 +89,6 @@ public class MainApp {
 				StaffUI.showStaffOption();
 			}
 		} while (true);
+		
 	}
 }

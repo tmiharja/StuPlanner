@@ -1,14 +1,19 @@
 package planner.model;
-
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
 import planner.db.CourseData;
 import planner.db.StudentData;
+
+/**
+ * Represents the Student who acts as the user of the 
+ * planner to register their courses.
+ * @version 1.0
+ * @since 2017-03-21
+ */
 
 public class Student {
 	
@@ -67,7 +72,7 @@ public class Student {
 		studentlist = StudentData.readStudents(filename);
 		return studentlist;
 	}
-	
+
 	//setters
 	public void setAccessStart(Calendar accessStart) {
 		this.accessStart = accessStart;
@@ -174,17 +179,5 @@ public class Student {
 			System.out.println("IOException > " + error.getMessage());
 		}	
 	}
-	
-	/*
-	public static void main(String args[]){
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		Date startDate = dateFormat.parse("19/4/2017 19:50");
-		Date endDate = dateFormat.parse("21/4/2017 19:50");
-		Student st = new Student("Htet Naing","U1620683D", 'M', "Myanmar", );
-		st.addCourse("CZ30001", "ACOA", 3, 12345, "April 30,2017");
-		st.printRegisteredCourses();
-		TextDB txtDB = new TextDB();
-		//txtDB.start();
-	}
-	*/
+>>>>>>> master
 }
