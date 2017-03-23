@@ -7,13 +7,14 @@ import java.util.Scanner;
 
 import planner.db.CoursesData;
 import planner.manager.CalendarMgr;
+import planner.manager.IndexMgr;
 import planner.manager.PrintMgr;
 import planner.manager.StaffCourseMgr;
 import planner.manager.StudentMgr;
+import planner.model.Course;
+import planner.model.CourseList;
 import planner.model.Student;
 import planner.model.StudentList;
-
-
 
 /**
  * The UI displayed to the staff as the admin.
@@ -40,11 +41,12 @@ public class StaffUI {
 			System.out.println("Please select an action:");
 			System.out.println("(1) Edit student access period");
 			System.out.println("(2) Add a student");
-			System.out.println("(3) Add/Update a course");
-			System.out.println("(4) Check available (vacancy) slot for an index number");
-			System.out.println("(5) Print student list by index number");
-			System.out.println("(6) Print student list by course");
-			System.out.println("(7) Logout");
+			System.out.println("(3) Add a course");
+			System.out.println("(4) Add an index to a course");
+			System.out.println("(5) Check available (vacancy) slot for an index number");
+			System.out.println("(6) Print student list by index number");
+			System.out.println("(7) Print student list by course");
+			System.out.println("(8) Logout");
 
 			System.out.print("> ");
 			try {
@@ -57,21 +59,23 @@ public class StaffUI {
 					addNewStudentUI();
 					break;
 				case 3: // Add/Update a course
-					addCourse();
-
+					addCourseUI();
 					break;
-				case 4: // Check available (vacancy) slot for an
-						// index number
 					
+				case 4: // Add an index to a course
+					addIndexUI();
+					break;
+					
+				case 5: // Check available vacancy for an index
+					break;
+
+				case 6: // Print student list by index number
 
 					break;
-				case 5: // Print student list by index number
+				case 7: // Print student list by course
 
 					break;
-				case 6: // Print student list by course
-
-					break;
-				case 7: // Logout
+				case 8: // Logout
 					System.out.println("Successfully Logged Out!");
 					System.out.println();
 					break StaffWhileLoop;
@@ -133,7 +137,7 @@ public class StaffUI {
 	 * done by the Staff
 	 * @throws IOException 
 	 */
-	private static void addCourse() throws IOException{
+	private static void addCourseUI() throws IOException{
 		System.out.print("Enter the course's code:"); String courseCode = sc.nextLine();
 		System.out.print("Enter the course's name:"); String courseName = sc.nextLine();
 		System.out.print("Enter the number of AUs:"); int AU = sc.nextInt();
@@ -142,7 +146,39 @@ public class StaffUI {
 		
 		Calendar examDate = CalendarMgr.getValidDateTime("examDate");
 	
-		StaffCourseMgr.addCourse(courseCode, courseName, AU, school, examDate);
+		StaffCourseMgr.addCourse(courseCode, courseName, AU, school, examDate);	
+	}
+	
+	/**
+	 * Show a UI to add a new index to a course
+	 * done by the Staff
+	 * @throws IOException 
+	 */
+	private static void addIndexUI(){
+
+		int choice;
+		ArrayList<Course> courseList = CourseList.getCourseList();
+		Course courseToUpdate;
+		PrintMgr.printCourseList();
 		
+		System.out.println("\nSelect the course:");
+		
+		choice = sc.nextInt();
+		courseToUpdate = courseList.get(choice);
+		
+		System.out.print("Enter the index number:"); int indexNumber = sc.nextInt();
+		sc.nextLine();
+		System.out.print("Enter the index vacancy:"); int vacancy = sc.nextInt();
+		sc.nextLine();
+		System.out.print("Does this index has lecture? (1 = yes, 0 = no)"); int isLecture = sc.nextInt();
+		sc.nextLine();
+		System.out.print("Does this index has tutorial? (1 = yes, 0 = no)"); int isTutorial = sc.nextInt();
+		sc.nextLine();
+		System.out.print("Does this index has lab? (1 = yes, 0 = no)"); int isLab = sc.nextInt();
+		sc.nextLine();
+		
+		IndexMgr.addIndex(courseToUpdate, indexNumber, vacancy, isLecture, isTutorial, isLab);
+		
+		PrintMgr.printIndexList(courseToUpdate);
 	}
 }
