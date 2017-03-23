@@ -6,25 +6,29 @@ public class Lesson {
 	/**
 	 * The venue of the lesson
 	 */
-	private String venue;
+	protected String venue;
 	
 	/**
 	 * The time of the lesson
 	 */
-	private Calendar lessonTime;
+	protected Calendar lessonStart;
+	protected Calendar lessonEnd;
 	
-	/**
-	 * Boolean attribute to indicate whether or not
-	 * the index has tutorial/ lecture/ lab
-	 */
-	private boolean hasClass;
 
-	public Calendar getLessonTime() {
-		return lessonTime;
+	public Calendar getLessonStart() {
+		return lessonStart;
 	}
 
-	public void setLessonTime(Calendar lessonTime) {
-		this.lessonTime = lessonTime;
+	public void setLessonStart(Calendar lessonStart) {
+		this.lessonStart = lessonStart;
+	}
+
+	public Calendar getLessonEnd() {
+		return lessonEnd;
+	}
+
+	public void setLessonEnd(Calendar lessonEnd) {
+		this.lessonEnd = lessonEnd;
 	}
 
 	public String getVenue() {
