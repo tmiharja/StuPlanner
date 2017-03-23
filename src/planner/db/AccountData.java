@@ -77,7 +77,7 @@ public class AccountData {
 	
 	// an example of saving
 	public static void saveStudents(String filename, List al) throws IOException {
-			List alw = new ArrayList() ;// to store Studetns data
+			List alw = new ArrayList() ;// to store Students data
 
 	        for (int i = 0 ; i < al.size() ; i++) {
 					Student std = (Student)al.get(i);
@@ -94,30 +94,5 @@ public class AccountData {
 				write(filename,alw);
 		}
 
-	/** Write fixed content to the given file. */
-	public static void write(String fileName, List data) throws IOException {
-		PrintWriter out = new PrintWriter(new FileWriter(fileName));
-
-		try {
-			for (int i = 0; i < data.size(); i++) {
-				out.println((String) data.get(i));
-			}
-		} finally {
-			out.close();
-		}
-	}
-
-	/** Read the contents of the given file. */
-	public static List read(String fileName) throws IOException {
-		List data = new ArrayList();
-		Scanner scanner = new Scanner(new FileInputStream(fileName));
-		try {
-			while (scanner.hasNextLine()) {
-				data.add(scanner.nextLine());
-			}
-		} finally {
-			scanner.close();
-		}
-		return data;
-	}
+	
 }
