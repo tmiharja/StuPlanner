@@ -1,10 +1,6 @@
 package planner.manager;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Scanner;
 import planner.model.Student;
 import planner.model.StudentList;
 
@@ -18,8 +14,6 @@ import planner.model.StudentList;
 public class StudentMgr {
 	
 	static ArrayList<Student> students = StudentList.getStudents();
-	
-	private static Scanner sc = new Scanner(System.in);	
 	
 	/**
 	 * Create a new student having the all necessary information.
@@ -50,37 +44,5 @@ public class StudentMgr {
 		System.out.println("Student " + studentName + "'s access period has been updated!");
 	}
 	
-	/**
-	 * Prompt user to give a valid access period
-	 * @return the VALID reservation date time
-	 */
-	@SuppressWarnings("null")
-	public static Calendar getValidDateTime(String mode){
-
-		String date = "";
-	    Date parsedDate = null;
-	    SimpleDateFormat dateFormat = null;
-		boolean validDate = false;		
-		Calendar newAccessPeriod = Calendar.getInstance();
-		
-		do{
-		    System.out.print("Enter " + mode + " access time (dd/MM/yyyy HH:mm): ");
-		    date  = sc.nextLine();
-		    dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		    
-		    try {
-		    	parsedDate = dateFormat.parse(date);
-		    	 
-		    } catch (ParseException e) {
-		        System.out.println("Entered access time is not in the correct format!");
-		        continue;
-		    }
-		    newAccessPeriod.setTime(parsedDate);
-		    validDate = true;
-
-		} while(!validDate);
-				
-		return newAccessPeriod;
-	}
 
 }
