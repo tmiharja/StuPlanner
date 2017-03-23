@@ -5,11 +5,13 @@ public class Account implements Serializable {
 	private String username ;
 	private String password ;
 	private String accountType ;
+	private String salt;
 
-	public Account(String user, String pass, String type)  {
-		username = user ;
-		password = pass ;
-		accountType = type ;
+	public Account(String username, String password, String accountType, String salt)  {
+		this.username = username ;
+		this.password = password ;
+		this.accountType = accountType ;
+		this.salt = salt;
 	}
 	
 	public String getUsername() { 
@@ -22,6 +24,10 @@ public class Account implements Serializable {
 	
 	public String getAccountType() { 
 		return accountType; 
+	}
+	
+	public String getSalt() { 
+		return salt; 
 	}
 
 	public boolean equals(Object obj) {

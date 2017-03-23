@@ -12,6 +12,8 @@ import planner.model.CourseList;
  * 
  */
 
+import planner.db.StudentData;
+import planner.model.Student;
 
 public class StaffCourseMgr {
 	static ArrayList<Course> courseList = CourseList.getCourseList();

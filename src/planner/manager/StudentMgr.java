@@ -13,7 +13,8 @@ import planner.model.StudentList;
 
 public class StudentMgr {
 	
-	static ArrayList<Student> students = StudentList.getStudents();
+	//static ArrayList<Student> students = StudentList.getStudents();
+	static String filename = "src/planner/db/students.txt";
 	
 	/**
 	 * Create a new student having the all necessary information.
@@ -22,11 +23,20 @@ public class StudentMgr {
 	 * @param matricNumber
 	 * @param gender
 	 * @param nationality
+	 * @throws ParseException 
 	 */	
-	public static void addStudent (String firstName, String lastName, String matricNumber, char gender, String nationality, Calendar accessStart, Calendar accessEnd) {
+	public static void addStudent (String firstName, String lastName, String matricNumber, char gender, String nationality, Calendar accessStart, Calendar accessEnd) throws ParseException {
 		Student newStudent = new Student(firstName, lastName, matricNumber, gender, nationality, accessStart, accessEnd);
-		students.add((Student) newStudent);
-		System.out.println("Student of matric no " + matricNumber + " was added to the food menu.");
+		//students.add((Student) newStudent);
+		//System.out.println("Student of matric no " + matricNumber + " was added to the food menu.");
+		
+		try{
+			ArrayList studList = StudentData.readStudents(filename);
+			studList.add(newStudent);
+			StudentData.saveStudents(filename, studList);
+		} catch (IOException e) {
+			System.out.println("IOException > " + e.getMessage());
+		}
 	}
 	
 	/**
@@ -43,6 +53,4 @@ public class StudentMgr {
 		student.setAccessEnd(newAccessEnd);
 		System.out.println("Student " + studentName + "'s access period has been updated!");
 	}
-	
-
 }
