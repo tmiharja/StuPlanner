@@ -69,7 +69,7 @@ public class Student {
 	}
 	
 	public ArrayList<Student> getStudentList() throws IOException, ParseException{
-		studentlist = StudentData.readStudents(filename);
+		studentlist = StudentData.initStudents();
 		return studentlist;
 	}
 
@@ -98,7 +98,7 @@ public class Student {
 		//CourseData.saveCourses(filename, al);
 	}
 	public void setStudentList(ArrayList al) throws IOException{
-		StudentData.saveStudents(filename, al);
+		StudentData.saveStudents( al);
 	}
 
 	public boolean equals(Object o) {
