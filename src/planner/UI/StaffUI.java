@@ -1,10 +1,14 @@
 package planner.UI;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
+import planner.db.CoursesData;
+import planner.manager.CalendarMgr;
 import planner.manager.PrintMgr;
+import planner.manager.StaffCourseMgr;
 import planner.manager.StudentMgr;
 import planner.model.Student;
 import planner.model.StudentList;
@@ -53,10 +57,12 @@ public class StaffUI {
 					addNewStudentUI();
 					break;
 				case 3: // Add/Update a course
+					addCourse();
 
 					break;
 				case 4: // Check available (vacancy) slot for an
 						// index number
+					
 
 					break;
 				case 5: // Print student list by index number
@@ -93,8 +99,8 @@ public class StaffUI {
 		sc.nextLine();
 		System.out.print("Enter the student's nationality: "); String nationality = sc.nextLine();
 		
-		Calendar accessStart = StudentMgr.getValidDateTime("start");
-		Calendar accessEnd = StudentMgr.getValidDateTime("end");
+		Calendar accessStart = CalendarMgr.getValidDateTime("start access period");
+		Calendar accessEnd = CalendarMgr.getValidDateTime("end access period");
 		  	
 		StudentMgr.addStudent(firstName, lastName, matricNumber, gender, nationality, accessStart, accessEnd);
 
@@ -116,9 +122,27 @@ public class StaffUI {
 		choice = sc.nextInt();
 		studentToUpdate = students.get(choice);
 		
-		Calendar newAccessStart = StudentMgr.getValidDateTime("new start");
-		Calendar newAccessEnd = StudentMgr.getValidDateTime("new end");
+		Calendar newAccessStart = CalendarMgr.getValidDateTime("new start access time");
+		Calendar newAccessEnd = CalendarMgr.getValidDateTime("new end access time");
 		
 		StudentMgr.updateAccessPeriod(studentToUpdate, newAccessStart, newAccessEnd);
+	}
+	
+	/**
+	 * Show a UI to add a new course
+	 * done by the Staff
+	 * @throws IOException 
+	 */
+	private static void addCourse() throws IOException{
+		System.out.print("Enter the course's code:"); String courseCode = sc.nextLine();
+		System.out.print("Enter the course's name:"); String courseName = sc.nextLine();
+		System.out.print("Enter the number of AUs:"); int AU = sc.nextInt();
+		sc.nextLine();
+		System.out.print("Enter the school that offers the course (eg: SCE):"); String school= sc.nextLine();
+		
+		Calendar examDate = CalendarMgr.getValidDateTime("examDate");
+	
+		StaffCourseMgr.addCourse(courseCode, courseName, AU, school, examDate);
+		
 	}
 }
