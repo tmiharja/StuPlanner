@@ -1,29 +1,22 @@
 package planner.UI;
 
-<<<<<<< HEAD
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 import planner.manager.CalendarMgr;
 import planner.manager.IndexMgr;
-=======
 import java.text.*;
 import java.util.*;
-
 import planner.manager.AccountMgr;
-import planner.manager.CalendarMgr;
->>>>>>> master
 import planner.manager.PrintMgr;
 import planner.manager.StaffCourseMgr;
 import planner.manager.StudentMgr;
-<<<<<<< HEAD
 import planner.model.Course;
 import planner.model.CourseList;
 import planner.model.Index;
-=======
 import planner.manager.UserValidationMgr;
->>>>>>> master
 import planner.model.Student;
 import planner.model.StudentList;
 
@@ -102,7 +95,7 @@ public class StaffUI {
 		}
 	}
     
-    * Show a UI that prompts Staff of the students'
+    /** Show a UI that prompts Staff of the students'
     * details to add new student
     * @throws ParseException
     */
@@ -126,7 +119,7 @@ public class StaffUI {
         StudentMgr.addStudent(firstName, lastName, matricNumber, gender, nationality, accessStart, accessEnd);
     }
 	
-	 * Show a UI to update the students' access period
+	 /* Show a UI to update the students' access period
 	 * done by the Staff
 	 */
 	private static void editAccessTimeUI(){
@@ -161,6 +154,7 @@ public class StaffUI {
 		Calendar examDate = CalendarMgr.getValidDateTime("examDate");
 	
 		StaffCourseMgr.addCourse(courseCode, courseName, AU, school, examDate);	
+
 	}
 	
 	/**
@@ -208,4 +202,5 @@ public class StaffUI {
 
 	 
         
+	}
 }

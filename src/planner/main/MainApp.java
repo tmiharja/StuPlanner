@@ -1,12 +1,12 @@
 package planner.main;
 
+import java.io.IOException;
 import java.text.*;
 import java.util.*;
 
 import planner.UI.StaffUI;
 import planner.UI.StudentUI;
 import planner.db.PlannerData;
-import planner.db.AccountData;
 import planner.db.CoursesData;
 import planner.manager.UserValidationMgr;
 import planner.model.Account;
@@ -14,16 +14,10 @@ import planner.model.Account;
 public class MainApp {
 
 	public static void main(String[] args) throws ParseException, IOException {
-		
-		CoursesData.initCourses();
-		
-		StaffUI.showStaffOption();
-		
-		
-		
 
 		// TODO Auto-generated method stub
 		PlannerData.initStudents();
+		CoursesData.initCourses();
 		StaffUI.showStaffOption();  
 
 		do {

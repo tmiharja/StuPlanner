@@ -1,8 +1,11 @@
 package planner.manager;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import planner.db.StudentData;
 import planner.model.Student;
-import planner.model.StudentList;
 
 /**
  * Student Manager Class manages the creation, removal 
@@ -31,7 +34,7 @@ public class StudentMgr {
 		//System.out.println("Student of matric no " + matricNumber + " was added to the food menu.");
 		
 		try{
-			ArrayList studList = StudentData.readStudents(filename);
+			ArrayList <Student> studList = StudentData.readStudents(filename);
 			studList.add(newStudent);
 			StudentData.saveStudents(filename, studList);
 		} catch (IOException e) {

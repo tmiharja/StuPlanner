@@ -63,12 +63,12 @@ public class Student {
 		return accessEnd;
 	}
 	
-	public ArrayList getCourseList() throws IOException, ParseException{ 
-		courselist = CourseData.readCourses(filename);
+	public ArrayList<Course> getCourseList() throws IOException, ParseException{ 
+		courselist = CourseData.initCourses();
 		return courselist;
 	}
 	
-	public ArrayList getStudentList() throws IOException, ParseException{
+	public ArrayList<Student> getStudentList() throws IOException, ParseException{
 		studentlist = StudentData.readStudents(filename);
 		return studentlist;
 	}
@@ -95,7 +95,7 @@ public class Student {
 		nationality = n; 
 	}
 	public void setCourseList(ArrayList al) throws IOException{ 
-		CourseData.saveCourses(filename, al);
+		//CourseData.saveCourses(filename, al);
 	}
 	public void setStudentList(ArrayList al) throws IOException{
 		StudentData.saveStudents(filename, al);
@@ -119,7 +119,7 @@ public class Student {
 					Course c =	(Course) al.get(i);
 					System.out.println("Course Code " + "	:	" + c.getCourseCode() );
 					System.out.println("Course Name " + "	:	" + c.getCourseName());
-					System.out.println("Academic AU " + "	:	"  + c.getAcademicUnit());
+					System.out.println("Academic AU " + "	:	"  + c.getAU());
 					System.out.println("School " + "		:	" + c.getSchool());
 					System.out.println("Exam Date " +"	:	" + c.getExamDate());
 					System.out.println();
@@ -179,5 +179,4 @@ public class Student {
 			System.out.println("IOException > " + error.getMessage());
 		}	
 	}
->>>>>>> master
 }

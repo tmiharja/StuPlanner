@@ -32,15 +32,19 @@ public class CalendarMgr {
 	 * Prompt user to give a valid access period
 	 * @return the VALID reservation date time
 	 */
-
 	@SuppressWarnings("null")
-	public static Calendar getValidDateTime(String date){
+	public static Calendar getValidDateTime(String mode){
+		
+		String date = "";
 
 	    Date parsedDate = null;
 		boolean validDate = false;		
 		Calendar newDate = Calendar.getInstance();
 		
 		do{
+			System.out.print("Enter " + mode + " access time (dd/MM/yyyy HH:mm): ");
+			date  = sc.nextLine();
+			dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		    try {
 		    	parsedDate = dateFormat.parse(date);
 		    	 
@@ -56,5 +60,6 @@ public class CalendarMgr {
 				
 		return newDate;
 	}
+	
 
 }

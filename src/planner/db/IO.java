@@ -9,7 +9,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class IO {
-	/** Write fixed content to the given file. */
+	/** Write fixed content to the given file.
+	 * @param fileName
+	 * @param data
+	 * @throws IOException
+	 */
 	public static void write(String fileName, List data) throws IOException {
 		PrintWriter out = new PrintWriter(new FileWriter(fileName));
 
@@ -22,7 +26,13 @@ public class IO {
 		}
 	}
 
-	/** Read the contents of the given file. */
+	/** Read the contents of the given file.
+	 * 
+	 * @param fileName
+	 * @return
+	 * @throws IOException
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static List read(String fileName) throws IOException {
 		List data = new ArrayList();
 		Scanner scanner = new Scanner(new FileInputStream(fileName));

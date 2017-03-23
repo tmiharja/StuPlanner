@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
-
-import planner.manager.DataMgr;
 import planner.model.Course;
 
 public class CoursesData {
@@ -28,7 +26,7 @@ public class CoursesData {
 	public static ArrayList<Course> initCourses() throws IOException, ParseException {
 		
 		// read String from text file
-		ArrayList<String> stringArray = (ArrayList) DataMgr.read("src/planner/db/courses.txt");
+		ArrayList<String> stringArray = (ArrayList) IO.read("src/planner/db/courses.txt");
 		
 		Calendar examDate = Calendar.getInstance();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -94,7 +92,7 @@ public class CoursesData {
 
 				courseListRename.add(stringBuild.toString()) ;
 			}
-			DataMgr.write("src/planner/db/courses.txt",courseListRename);
+			IO.write("src/planner/db/courses.txt",courseListRename);
 	}
 
 }
