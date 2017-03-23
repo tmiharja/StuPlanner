@@ -1,5 +1,9 @@
 package planner.model;
 
-public class Lab {
+public class Lab extends Schedule{
+	
+	
+	
+	
 
 }

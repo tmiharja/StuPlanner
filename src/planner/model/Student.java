@@ -13,37 +13,37 @@ import java.util.Calendar;
 public class Student extends UserAcc implements Serializable{
 	
 	/**
-	//The domain which differentiates students and staff
+	 * The domain which differentiates students and staff
 	 */
 	private final static String DOMAIN = "STUDENT";
 	
 	/**
-	//The matriculation number unique to each student
+	 * The matriculation number unique to each student
 	 */
 	private String matricNumber;
 	
 	/**
-	//The gender of the student (either F or M)
+	 * The gender of the student (either F or M)
 	 */
 	private char gender;
 	
 	/**
-	//The nationality of the student
+	 * The nationality of the student
 	 */
 	private String nationality;
 	
 	/**
-	//The start of the access period of the student
+	 * The start of the access period of the student
 	 */
 	private Calendar accessStart;
 	
 	/**
-	//The end of the access period of the student
+	 * The end of the access period of the student
 	 */
 	private Calendar accessEnd;
 	
 	/**
-	//List of all courses registered by the student
+	 * List of all courses registered by the student
 	 */
 	// CourseList courseList;
 	
