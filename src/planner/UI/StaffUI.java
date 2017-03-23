@@ -27,27 +27,57 @@ public class StaffUI {
 	 * menu item from menu
 	 */	
 	public static void showStaffOption(){
-		
+
 		int choice;
 		
-        do {
-        	System.out.println("\nSelect a choice: ");
-            System.out.println("(1) Add new student");
-            System.out.println("(2) Change student's access time");
-            System.out.println("(3) Back");
-        	choice = sc.nextInt();
-        	sc.nextLine();
-        	
-        	switch (choice) {
-	            case 1: 
-	            		addNewStudentUI();
-	                    break;
-	            case 2:
-	            		editAccessTimeUI();
-	                    break;
-	            case 3:
-        	}
-        } while (choice < 3);
+		StaffWhileLoop:
+		while(true){
+			System.out.println("***Welcome to Staff panel!***");
+			System.out.println("Please select an action:");
+			System.out.println("(1) Edit student access period");
+			System.out.println("(2) Add a student");
+			System.out.println("(3) Add/Update a course");
+			System.out.println("(4) Check available (vacancy) slot for an index number");
+			System.out.println("(5) Print student list by index number");
+			System.out.println("(6) Print student list by course");
+			System.out.println("(7) Logout");
+
+			System.out.print("> ");
+			try {
+				choice = Integer.parseInt(sc.nextLine());
+				switch (choice) {
+				case 1: // Edit student access period
+					editAccessTimeUI();
+					break;
+				case 2: // Add a student
+					addNewStudentUI();
+					break;
+				case 3: // Add/Update a course
+
+					break;
+				case 4: // Check available (vacancy) slot for an
+						// index number
+
+					break;
+				case 5: // Print student list by index number
+
+					break;
+				case 6: // Print student list by course
+
+					break;
+				case 7: // Logout
+					System.out.println("Successfully Logged Out!");
+					System.out.println();
+					break StaffWhileLoop;
+				default:
+					System.out.println("Invalid Input! Please re-enter!");
+					System.out.println();
+				}
+			} catch (Exception e) {
+				System.out.println("Invalid Input! Please re-enter!");
+				System.out.println();
+			}
+		}
 	}
 	
 	/**

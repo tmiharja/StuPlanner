@@ -1,0 +1,5 @@
+admin1|admin11|Staff
+admin2|admin22|Staff
+stud1|stud11|Student
+stud2|stud22|Student
+stud3|stud33|Student
