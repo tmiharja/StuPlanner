@@ -27,4 +27,12 @@ public class Lesson {
 		this.lessonTime = lessonTime;
 	}
 
+	public String getVenue() {
+		return venue;
+	}
+
+	public void setVenue(String venue) {
+		this.venue = venue;
+	}
+
 }

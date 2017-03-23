@@ -1,7 +1,8 @@
 package planner.model;
 
+import java.util.Calendar;
+
 public class Course {
-<<<<<<< HEAD
 	/**
 	 * The course code unique to each module
 	 */
@@ -26,62 +27,51 @@ public class Course {
 	 * The list of indexes for the course that the student can register to
 	 */
 	Index indexList;
-=======
-	private String courseCode;
-	private String courseName;
-	private int academicUnit; 
-	private int index;
-	private String examDate;
 	
-	//constructor
-	public Course(String cc, String cn, int au,int i, String e){
-		courseCode = cc; 
-		courseName = cn; 
-		academicUnit = au; 
-		index = i; 
-		examDate = e; 	
-	}
-	//getters 
-	public String getCourseCode(){
+	/**
+	 * The exam date of the course
+	 */
+	Calendar examDate;
+	
+	
+
+	public String getCourseCode() {
 		return courseCode;
 	}
-	public String getCourseName(){
+	
+	/**
+	 * Change the course code
+	 * @param courseCode
+	 */
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
+	}
+	
+
+	public String getCourseName() {
 		return courseName;
-	}	
-	public int getAcademicUnit(){
-		return academicUnit;
 	}
-	public int getIndex(){
-		return index;
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
-	public String getExamDate(){
-		return examDate;
+
+	public int getAU() {
+		return AU;
 	}
+
+	public void setAU(int aU) {
+		AU = aU;
+	}
+
+	public String getSchool() {
+		return school;
+	}
+
+	public void setSchool(String school) {
+		this.school = school;
+	}
+
 	
-	//setters 
-	public void setCourseCode(String cc){
-		courseCode = cc; 
-	}
-	public void setCourseName(String cn){
-		courseName = cn; 
-	}	
-	public void setAcademicUnit(int au){
-		academicUnit = au;  
-	}
-	public void setIndex(int i){ 
-		index = i; 
-	}
-	public void setExamDate(String e){
-		examDate = e; 
-	}
-	
-	public boolean equals(Object o) {
-		if (o instanceof Course) {
-			Course st = (Course)o;
-			return (getCourseCode().equals(st.getCourseCode()));
-		}
-		return false;
-	}
->>>>>>> master
 
 }
