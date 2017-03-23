@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import planner.model.Course;
 import planner.model.CourseList;
+import planner.model.Index;
+import planner.model.IndexList;
 import planner.model.Student;
 import planner.model.StudentList;
 
@@ -14,9 +16,7 @@ import planner.model.StudentList;
  */
 
 public class PrintMgr {
-	
-	
-	
+
 	/**
 	 * Print out all the student names on the Student List
 	 * from index 0 to the end of the array
@@ -49,6 +49,25 @@ public class PrintMgr {
 			int index = 0;
 			for(Course course : courses) {
 				System.out.println("(" + index++ + ") " + course.getCourseName() + " " + course.getCourseCode());
+			}
+		}
+	}
+	
+	/**
+	 * Print out all the indexes of a course
+	 * from index 0 to the end of the array
+	 */
+	public static void printIndexList(Course course){
+		
+		ArrayList<Index> indexList = (course.getIndexList()).getIndexList();
+		if(indexList.size() <= 0){
+			System.out.println("There is no index for this course.");
+			return;
+		}
+		else{
+			int counter = 0;
+			for(Index index : indexList) {
+				System.out.println("(" + counter++ + ") " + index.getIndexNumber() + " " + index.getVacancy());
 			}
 		}
 	}
