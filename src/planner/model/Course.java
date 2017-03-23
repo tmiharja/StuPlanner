@@ -26,12 +26,29 @@ public class Course {
 	/**
 	 * The list of indexes for the course that the student can register to
 	 */
-	Index indexList;
+	IndexList indexList;
 	
-	/**
-	 * The exam date of the course
+	/** The exam date of the module
 	 */
 	Calendar examDate;
+	
+	
+	
+	
+	public Calendar getExamDate() {
+		return examDate;
+	}
+	
+
+	/** Constructor for Course
+	 */
+	public Course (String courseCode, String courseName, int AU, String school, Calendar examDate) {
+		this.courseCode			= courseCode;
+		this.courseName			= courseName;
+		this.AU					= AU;
+		this.school				= school;
+		this.examDate			= examDate;
+	}
 	
 	
 
@@ -72,6 +89,9 @@ public class Course {
 		this.school = school;
 	}
 
-	
+	public void setExamDate(Calendar examDate){
+		this.examDate = examDate;
+	}
+
 
 }
