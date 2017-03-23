@@ -25,8 +25,8 @@ public class StaffCourseMgr {
 		courseList.add((Course) newCourse);
 		System.out.println("Course " + courseName + " (" + courseCode + ") has been added!");
 		
-		
-		CoursesData.saveCourses(courseList);
+		//Use this before closing!
+		//CoursesData.saveCourses(courseList);
 	}
 	
 	
