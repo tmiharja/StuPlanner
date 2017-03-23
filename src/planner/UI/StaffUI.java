@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
-
-import planner.db.CoursesData;
 import planner.manager.CalendarMgr;
 import planner.manager.IndexMgr;
 import planner.manager.PrintMgr;
@@ -13,6 +11,7 @@ import planner.manager.StaffCourseMgr;
 import planner.manager.StudentMgr;
 import planner.model.Course;
 import planner.model.CourseList;
+import planner.model.Index;
 import planner.model.Student;
 import planner.model.StudentList;
 
@@ -157,6 +156,7 @@ public class StaffUI {
 	private static void addIndexUI(){
 
 		int choice;
+		Index newIndex;
 		ArrayList<Course> courseList = CourseList.getCourseList();
 		Course courseToUpdate;
 		PrintMgr.printCourseList();
@@ -177,7 +177,17 @@ public class StaffUI {
 		System.out.print("Does this index has lab? (1 = yes, 0 = no)"); int isLab = sc.nextInt();
 		sc.nextLine();
 		
-		IndexMgr.addIndex(courseToUpdate, indexNumber, vacancy, isLecture, isTutorial, isLab);
+		newIndex = IndexMgr.addIndex(courseToUpdate, indexNumber, vacancy, isLecture, isTutorial, isLab);
+		
+		if (isLecture == 1){
+			
+		}
+		if (isTutorial == 1){
+			
+		}
+		if (isLab == 1){
+			
+		}
 		
 		PrintMgr.printIndexList(courseToUpdate);
 	}
