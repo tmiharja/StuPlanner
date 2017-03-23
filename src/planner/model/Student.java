@@ -1,10 +1,7 @@
 package planner.model;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
 
-import planner.db.CoursesData;
 
 /**
  * Represents the Student who acts as the user of the 
@@ -126,65 +123,4 @@ public class Student extends UserAcc implements Serializable{
 	 */
 	public Calendar getAccessEnd(){ return this.accessEnd; }
 	
-	public ArrayList getCourseList() throws IOException{ 
-		courselist = CoursesTextDB.readCourses(filename);
-		return courselist;
-	}
-	
-	public void setCourseList(ArrayList al) throws IOException{ 
-		CoursesData.saveCourses(filename, al);
-	}
-	
-	public boolean equals(Object o) {
-		if (o instanceof Student) {
-			Student st = (Student) o;
-			return (getLastName().equals(st.getLastName()));
-		}
-		return false;
-	}
-	
-	public void printRegisteredCourses(){
-		try {
-		
-			// read file containing Student records.
-			ArrayList al = getCourseList();
-			
-			for (int i = 0 ; i < al.size() ; i++) {
-					Course c =	(Course) al.get(i);
-					System.out.println("Course Code " + "	:	" + c.getCourseCode() );
-					System.out.println("Course Name " + "	:	" + c.getCourseName());
-					System.out.println("Academic AU " + "	:	"  + c.getAcademicUnit());
-					System.out.println("Index " + "		:	" + c.getIndex());
-					System.out.println("Exam Date " +"	:	" + c.getExamDate());
-					System.out.println();
-			}
-		}catch (IOException e) {
-			System.out.println("IOException > " + e.getMessage());
-		}
-	  }
-	
-	public void addCourse(String cc, String cn, int au,int i, String e){
-		try {	
-			// read file containing Student records.
-			ArrayList al = getCourseList();
-			Course course = new Course(cc,cn,au,i,e);
-			al.add(course);
-			setCourseList(al);
-		}catch (IOException error) {
-			System.out.println("IOException > " + error.getMessage());
-		}
-	}
-	
-	public void dropCourse(String cc, String cn, int au, int i, String e){
-		try {	
-			// read file containing Student records.
-			ArrayList al = getCourseList();
-			Course course = new Course(cc,cn,au,i,e);
-			al.remove(course);
-			setCourseList(al);
-			
-		}catch (IOException error) {
-			System.out.println("IOException > " + error.getMessage());
-		}	
-	}
 }
