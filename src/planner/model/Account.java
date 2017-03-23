@@ -11,6 +11,7 @@ public class Account implements Serializable {
 		password = pass ;
 		accountType = type ;
 	}
+	
 	public String getUsername() { 
 		return username; 
 	}
