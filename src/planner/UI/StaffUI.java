@@ -1,11 +1,13 @@
 package planner.UI;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Scanner;
+import java.text.*;
+import java.util.*;
 
+import planner.manager.AccountMgr;
+import planner.manager.CalendarMgr;
 import planner.manager.PrintMgr;
 import planner.manager.StudentMgr;
+import planner.manager.UserValidationMgr;
 import planner.model.Student;
 import planner.model.StudentList;
 
@@ -27,7 +29,6 @@ public class StaffUI {
 	 * menu item from menu
 	 */	
 	public static void showStaffOption(){
-
 		int choice;
 		
 		StaffWhileLoop:
@@ -51,12 +52,13 @@ public class StaffUI {
 					break;
 				case 2: // Add a student
 					addNewStudentUI();
+					System.out.println("A New Student Added Successfully!");
+					System.out.println();
 					break;
 				case 3: // Add/Update a course
-
+					CourseUI.addUpdateCourseUI();
 					break;
-				case 4: // Check available (vacancy) slot for an
-						// index number
+				case 4: // Check available (vacancy) slot for an index number
 
 					break;
 				case 5: // Print student list by index number
@@ -81,26 +83,6 @@ public class StaffUI {
 	}
 	
 	/**
-	 * Show a UI that prompts Staff of the students'
-	 * details to add new student
-	 */
-	private static void addNewStudentUI(){
-
-		System.out.print("Enter the student's first name:"); String firstName = sc.nextLine();
-		System.out.print("Enter the student's last name:"); String lastName = sc.nextLine();
-		System.out.print("Enter the student's matric number:"); String matricNumber = sc.nextLine();
-		System.out.print("Enter the student's gender:"); char gender= sc.next().charAt(0);
-		sc.nextLine();
-		System.out.print("Enter the student's nationality: "); String nationality = sc.nextLine();
-		
-		Calendar accessStart = StudentMgr.getValidDateTime("start");
-		Calendar accessEnd = StudentMgr.getValidDateTime("end");
-		  	
-		StudentMgr.addStudent(firstName, lastName, matricNumber, gender, nationality, accessStart, accessEnd);
-
-	}
-	
-	/**
 	 * Show a UI to update the students' access period
 	 * done by the Staff
 	 */
@@ -116,9 +98,34 @@ public class StaffUI {
 		choice = sc.nextInt();
 		studentToUpdate = students.get(choice);
 		
-		Calendar newAccessStart = StudentMgr.getValidDateTime("new start");
-		Calendar newAccessEnd = StudentMgr.getValidDateTime("new end");
+		Calendar newAccessStart = CalendarMgr.getValidDateTime("new start");
+		Calendar newAccessEnd = CalendarMgr.getValidDateTime("new end");
 		
 		StudentMgr.updateAccessPeriod(studentToUpdate, newAccessStart, newAccessEnd);
+	}
+	
+	/**
+	 * Show a UI that prompts Staff of the students'
+	 * details to add new student
+	 * @throws ParseException 
+	 */
+	private static void addNewStudentUI() throws ParseException{
+		System.out.print("Enter the student's username: "); String username = sc.nextLine();
+		System.out.print("Enter the student's first name: "); String firstName = sc.nextLine();
+		System.out.print("Enter the student's last name: "); String lastName = sc.nextLine();
+		System.out.print("Enter the student's matric number: "); String matricNumber = sc.nextLine();
+		System.out.print("Enter the student's gender: "); char gender= sc.next().charAt(0);
+		sc.nextLine();
+		System.out.print("Enter the student's nationality: "); String nationality = sc.nextLine();
+		
+		System.out.print("Enter start access time (dd/MM/yyyy HH:mm): "); 
+		Calendar accessStart = CalendarMgr.getValidDateTime(sc.nextLine());
+		System.out.print("Enter end access time (dd/MM/yyyy HH:mm): "); 
+		Calendar accessEnd = CalendarMgr.getValidDateTime(sc.nextLine());
+		
+		String salt = UserValidationMgr.generateSalt();
+		  	
+		AccountMgr.addAccount(username, matricNumber, salt);
+		StudentMgr.addStudent(firstName, lastName, matricNumber, gender, nationality, accessStart, accessEnd);
 	}
 }

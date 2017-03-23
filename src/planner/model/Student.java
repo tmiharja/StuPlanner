@@ -1,61 +1,29 @@
 package planner.model;
+
 import java.io.IOException;
-import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
-import planner.db.CoursesData;
+import planner.db.CourseData;
+import planner.db.StudentData;
 
-/**
- * Represents the Student who acts as the user of the 
- * planner to register their courses.
- * @version 1.0
- * @since 2017-03-21
- */
-
-public class Student extends UserAcc implements Serializable{
+public class Student {
 	
-	/**
-	//The domain which differentiates students and staff
-	 */
-	private final static String DOMAIN = "STUDENT";
-	
-	/**
-	//The matriculation number unique to each student
-	 */
+	private String firstName; 
+	private String lastName;
 	private String matricNumber;
-	
-	/**
-	//The gender of the student (either F or M)
-	 */
 	private char gender;
-	
-	/**
-	//The nationality of the student
-	 */
-	private String nationality;
-	
-	/**
-	//The start of the access period of the student
-	 */
+	private String nationality; 
 	private Calendar accessStart;
+	private Calendar accessEnd; 
+	private ArrayList courselist;
+	private ArrayList studentlist; 
+	private static final String filename = "student.txt";
 	
-	/**
-	//The end of the access period of the student
-	 */
-	private Calendar accessEnd;
-	
-	/**
-	//List of all courses registered by the student
-	 */
-	// CourseList courseList;
-	
-	/**
-	 * Create a new student having the all necessary information.
-	 * @param matricNumber
-	 * @param gender
-	 * @param nationality
-	 */	
+	//constructor
 	public Student (String firstName, String lastName, String matricNumber, char gender, String nationality, Calendar accessStart, Calendar accessEnd) {
 		this.firstName 			= firstName;
 		this.lastName 			= lastName;
@@ -66,75 +34,68 @@ public class Student extends UserAcc implements Serializable{
 		this.accessEnd 			= accessEnd;
 	}
 	
-	/**
-	 * Change the matric number of the student
-	 * @param matricNumber
-	 */
-	public void setMatricNumber(String matricNumber){ this.matricNumber = matricNumber; }
+	//getters 
+	public String getFirstName(){
+		return firstName; 
+	}
+	public String getLastName(){
+		return lastName; 
+	}
+	public String getMatNumber(){
+		return matricNumber;
+	}	
+	public char getGender(){
+		return gender; 
+	}
+	public String getNationality(){
+		return nationality;
+	}
 	
-	/**
-	 * Change the gender of the student
-	 * @param gender
-	 */
-	public void setGender(char gender){ this.gender = gender; }
+	public Calendar getAccessStart() {
+		return accessStart;
+	}
+	public Calendar getAccessEnd() {
+		return accessEnd;
+	}
 	
-	/**
-	 * Change the nationality of the student
-	 * @param nationality
-	 */
-	public void setNationality(String nationality){ this.nationality = nationality; }
-	
-	/**
-	 * Change the starting access period of the student
-	 * @param accessPeriod
-	 */
-	public void setAccessStart(Calendar accessStart){ this.accessStart = accessStart; }
-	
-	/**
-	 * Change the end access period of the student
-	 * @param accessPeriod
-	 */
-	public void setAccessEnd(Calendar accessEnd){ this.accessEnd = accessEnd; }
-	
-	/**
-	 * Get the matric number of the student
-	 * @return this matricNumber
-	 */
-	public String getMatricNumber(){ return this.matricNumber; }
-	
-	/**
-	 * Get the gender of the student
-	 * @return this gender
-	 */
-	public char getGender(){ return this.gender; }
-	
-	/**
-	 * Get the nationality of the student
-	 * @return this nationality
-	 */
-	public String getNationality(){ return this.nationality; }
-	
-	/**
-	 * Get the starting access period of the student
-	 * @return this accessPeriod
-	 */
-	public Calendar getAccessStart(){ return this.accessStart; }
-	
-	/**
-	 * Get the ending access period of the student
-	 * @return this accessPeriod
-	 */
-	public Calendar getAccessEnd(){ return this.accessEnd; }
-	
-	public ArrayList getCourseList() throws IOException{ 
-		courselist = CoursesTextDB.readCourses(filename);
+	public ArrayList getCourseList() throws IOException, ParseException{ 
+		courselist = CourseData.readCourses(filename);
 		return courselist;
 	}
 	
-	public void setCourseList(ArrayList al) throws IOException{ 
-		CoursesData.saveCourses(filename, al);
+	public ArrayList getStudentList() throws IOException, ParseException{
+		studentlist = StudentData.readStudents(filename);
+		return studentlist;
 	}
 	
+	//setters
+	public void setAccessStart(Calendar accessStart) {
+		this.accessStart = accessStart;
+	}
+	
+	public void setAccessEnd(Calendar accessEnd) {
+		this.accessEnd = accessEnd;
+	}
+
+	public void setFirstName(String nm){
+		firstName = nm;
+	}
+	public void setMatricNumber(String m){
+		matricNumber = m; 
+	}
+	public void setGender(char g){
+		gender = g; 
+	}
+	public void setNationality(String n){
+		nationality = n; 
+	}
+	public void setCourseList(ArrayList al) throws IOException{ 
+		CourseData.saveCourses(filename, al);
+	}
+	public void setStudentList(ArrayList al) throws IOException{
+		StudentData.saveStudents(filename, al);
+	}
+
 	public boolean equals(Object o) {
 		if (o instanceof Student) {
 			Student st = (Student) o;
@@ -143,7 +104,7 @@ public class Student extends UserAcc implements Serializable{
 		return false;
 	}
 	
-	public void printRegisteredCourses(){
+	public void printRegisteredCourses() throws ParseException{
 		try {
 		
 			// read file containing Student records.
@@ -154,7 +115,7 @@ public class Student extends UserAcc implements Serializable{
 					System.out.println("Course Code " + "	:	" + c.getCourseCode() );
 					System.out.println("Course Name " + "	:	" + c.getCourseName());
 					System.out.println("Academic AU " + "	:	"  + c.getAcademicUnit());
-					System.out.println("Index " + "		:	" + c.getIndex());
+					System.out.println("School " + "		:	" + c.getSchool());
 					System.out.println("Exam Date " +"	:	" + c.getExamDate());
 					System.out.println();
 			}
@@ -163,11 +124,12 @@ public class Student extends UserAcc implements Serializable{
 		}
 	  }
 	
-	public void addCourse(String cc, String cn, int au,int i, String e){
+	
+	public void addCourse(String cc, String cn, int au,String s, Calendar e) throws ParseException{
 		try {	
 			// read file containing Student records.
 			ArrayList al = getCourseList();
-			Course course = new Course(cc,cn,au,i,e);
+			Course course = new Course(cc,cn,au,s,e);
 			al.add(course);
 			setCourseList(al);
 		}catch (IOException error) {
@@ -175,11 +137,11 @@ public class Student extends UserAcc implements Serializable{
 		}
 	}
 	
-	public void dropCourse(String cc, String cn, int au, int i, String e){
+	public void dropCourse(String cc, String cn, int au, String s, Calendar e) throws ParseException{
 		try {	
 			// read file containing Student records.
 			ArrayList al = getCourseList();
-			Course course = new Course(cc,cn,au,i,e);
+			Course course = new Course(cc,cn,au,s,e);
 			al.remove(course);
 			setCourseList(al);
 			
@@ -187,4 +149,42 @@ public class Student extends UserAcc implements Serializable{
 			System.out.println("IOException > " + error.getMessage());
 		}	
 	}
+	
+	public void addStudent(String fn, String ln,String mt, char c, String nt, Calendar std, Calendar ed) throws ParseException{
+		try {	
+			// read file containing Student records.
+			ArrayList al = getStudentList();
+			Student st = new Student(fn, ln,mt, c, nt, std, ed);
+			al.add(st);
+			setStudentList(al);
+		}catch (IOException error) {
+			System.out.println("IOException > " + error.getMessage());
+		}
+	}
+	
+	public void removeStudent(String fn, String ln, String mt, char c, String nt, Calendar std, Calendar ed) throws ParseException{
+		try {	
+			// read file containing Student records.
+			ArrayList al = getStudentList();
+			Student st = new Student(fn, ln, mt, c, nt, std, ed);
+			al.remove(st);
+			setStudentList(al);
+			
+		}catch (IOException error) {
+			System.out.println("IOException > " + error.getMessage());
+		}	
+	}
+	
+	/*
+	public static void main(String args[]){
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Date startDate = dateFormat.parse("19/4/2017 19:50");
+		Date endDate = dateFormat.parse("21/4/2017 19:50");
+		Student st = new Student("Htet Naing","U1620683D", 'M', "Myanmar", );
+		st.addCourse("CZ30001", "ACOA", 3, 12345, "April 30,2017");
+		st.printRegisteredCourses();
+		TextDB txtDB = new TextDB();
+		//txtDB.start();
+	}
+	*/
 }
