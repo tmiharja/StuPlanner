@@ -10,7 +10,7 @@ public class MainApp {
 	public static void main(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
 		PlannerData.initStudents();
-		StaffUI.showStaffOption();
+		StaffUI.showStaffOption();  
 
 	}
 
