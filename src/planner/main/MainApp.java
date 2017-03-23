@@ -9,16 +9,24 @@ import planner.UI.StaffUI;
 import planner.UI.StudentUI;
 import planner.db.PlannerData;
 import planner.db.AccountData;
+import planner.db.CoursesData;
 import planner.model.Account;
 
 public class MainApp {
 
-	public static void main(String[] args) throws ParseException {
-<<<<<<< HEAD
+	public static void main(String[] args) throws ParseException, IOException {
+		
+		CoursesData.initCourses();
+		
+		StaffUI.showStaffOption();
+		
+		
+		/*
+
 		// TODO Auto-generated method stub
 		PlannerData.initStudents();
 		StaffUI.showStaffOption();  
-=======
+
 		do {
 			String filename = "src/planner/db/accounts.txt";
 			String username;
@@ -26,7 +34,7 @@ public class MainApp {
 			String accountType = "";
 			int choice = 0;
 			Account loggedInAcc;
->>>>>>> master
+
 
 			try {
 				// read file containing Account records.
@@ -98,5 +106,6 @@ public class MainApp {
 				System.out.println("IOException > " + e.getMessage());
 			}
 		} while (true);
+		*/
 	}
 }
