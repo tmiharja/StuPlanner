@@ -35,8 +35,8 @@ public class PlannerData {
 		Calendar accessEnd = Calendar.getInstance();
 		accessEnd.setTime(endDate);
 		
-		students.add(new Student("Michelle", "Tan", "U1521000E", 'M', "Singaporean", accessStart, accessEnd));	
-		PlannerData.students = students;
+		//students.add(new Student("Michelle", "Tan", "U1521000E", 'M', "Singaporean", accessStart, accessEnd));	
+		//PlannerData.students = students;
 	}
 	
 	/**

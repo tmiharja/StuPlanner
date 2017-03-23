@@ -1,10 +1,15 @@
 package planner.manager;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
+
+import planner.db.AccountData;
+import planner.db.StudentData;
+import planner.model.Account;
 import planner.model.Student;
 import planner.model.StudentList;
 
@@ -17,7 +22,8 @@ import planner.model.StudentList;
 
 public class StudentMgr {
 	
-	static ArrayList<Student> students = StudentList.getStudents();
+	//static ArrayList<Student> students = StudentList.getStudents();
+	static String filename = "src/planner/db/students.txt";
 	
 	private static Scanner sc = new Scanner(System.in);	
 	
@@ -28,11 +34,20 @@ public class StudentMgr {
 	 * @param matricNumber
 	 * @param gender
 	 * @param nationality
+	 * @throws ParseException 
 	 */	
-	public static void addStudent (String firstName, String lastName, String matricNumber, char gender, String nationality, Calendar accessStart, Calendar accessEnd) {
+	public static void addStudent (String firstName, String lastName, String matricNumber, char gender, String nationality, Calendar accessStart, Calendar accessEnd) throws ParseException {
 		Student newStudent = new Student(firstName, lastName, matricNumber, gender, nationality, accessStart, accessEnd);
-		students.add((Student) newStudent);
-		System.out.println("Student of matric no " + matricNumber + " was added to the food menu.");
+		//students.add((Student) newStudent);
+		//System.out.println("Student of matric no " + matricNumber + " was added to the food menu.");
+		
+		try{
+			ArrayList studList = StudentData.readStudents(filename);
+			studList.add(newStudent);
+			StudentData.saveStudents(filename, studList);
+		} catch (IOException e) {
+			System.out.println("IOException > " + e.getMessage());
+		}
 	}
 	
 	/**
@@ -49,38 +64,4 @@ public class StudentMgr {
 		student.setAccessEnd(newAccessEnd);
 		System.out.println("Student " + studentName + "'s access period has been updated!");
 	}
-	
-	/**
-	 * Prompt user to give a valid access period
-	 * @return the VALID reservation date time
-	 */
-	@SuppressWarnings("null")
-	public static Calendar getValidDateTime(String mode){
-
-		String date = "";
-	    Date parsedDate = null;
-	    SimpleDateFormat dateFormat = null;
-		boolean validDate = false;		
-		Calendar newAccessPeriod = Calendar.getInstance();
-		
-		do{
-		    System.out.print("Enter " + mode + " access time (dd/MM/yyyy HH:mm): ");
-		    date  = sc.nextLine();
-		    dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		    
-		    try {
-		    	parsedDate = dateFormat.parse(date);
-		    	 
-		    } catch (ParseException e) {
-		        System.out.println("Entered access time is not in the correct format!");
-		        continue;
-		    }
-		    newAccessPeriod.setTime(parsedDate);
-		    validDate = true;
-
-		} while(!validDate);
-				
-		return newAccessPeriod;
-	}
-
 }
