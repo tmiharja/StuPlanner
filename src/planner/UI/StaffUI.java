@@ -108,10 +108,8 @@ public class StaffUI {
         sc.nextLine();
         System.out.print("Enter the student's nationality: "); String nationality = sc.nextLine();
         
-        System.out.print("Enter start access time (dd/MM/yyyy HH:mm): ");
-        Calendar accessStart = CalendarMgr.getValidDateTime(sc.nextLine());
-        System.out.print("Enter end access time (dd/MM/yyyy HH:mm): ");
-        Calendar accessEnd = CalendarMgr.getValidDateTime(sc.nextLine());
+        Calendar accessStart = CalendarMgr.getValidDateTime("access start");
+        Calendar accessEnd = CalendarMgr.getValidDateTime("access end");
         
         String salt = UserValidationMgr.generateSalt();
         
@@ -130,12 +128,12 @@ public class StaffUI {
 		PrintMgr.printStudentList();
 		
 		System.out.println("\nSelect the student whose access period is to be updated:");
-		
 		choice = sc.nextInt();
 		studentToUpdate = students.get(choice);
-
-		Calendar newAccessStart = CalendarMgr.getValidDateTime("new start access time");
-		Calendar newAccessEnd = CalendarMgr.getValidDateTime("new end access time");
+		
+	    Calendar newAccessStart = CalendarMgr.getValidDateTime("new access start");
+	    Calendar newAccessEnd = CalendarMgr.getValidDateTime("new access end");
+	        
 		StudentMgr.updateAccessPeriod(studentToUpdate, newAccessStart, newAccessEnd);
 	}
 	

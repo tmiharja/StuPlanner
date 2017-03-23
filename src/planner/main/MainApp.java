@@ -7,6 +7,7 @@ import java.util.*;
 import planner.UI.StaffUI;
 import planner.UI.StudentUI;
 import planner.db.PlannerData;
+import planner.db.StudentData;
 import planner.db.CoursesData;
 import planner.manager.UserValidationMgr;
 import planner.model.Account;
@@ -16,7 +17,7 @@ public class MainApp {
 	public static void main(String[] args) throws ParseException, IOException {
 
 		// TODO Auto-generated method stub
-		PlannerData.initStudents();
+		StudentData.initStudents();
 		CoursesData.initCourses();
 		StaffUI.showStaffOption();  
 

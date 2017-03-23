@@ -34,9 +34,9 @@ public class StudentMgr {
 		//System.out.println("Student of matric no " + matricNumber + " was added to the food menu.");
 		
 		try{
-			ArrayList <Student> studList = StudentData.readStudents(filename);
+			ArrayList <Student> studList = StudentData.initStudents();
 			studList.add(newStudent);
-			StudentData.saveStudents(filename, studList);
+			StudentData.saveStudents(studList);
 		} catch (IOException e) {
 			System.out.println("IOException > " + e.getMessage());
 		}

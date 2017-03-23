@@ -9,13 +9,15 @@ import planner.model.Student;
 
 public class StudentData {
 	public static final String SEPARATOR = "|";
+	
+	public static ArrayList<Student> studentList = new ArrayList();// to store Students data
 
 	// an example of reading
-	public static ArrayList readStudents(String filename) throws IOException, ParseException {
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Student> initStudents() throws IOException, ParseException {
 		// read String from text file
-		ArrayList stringArray = (ArrayList) IO.read(filename);
-		ArrayList alr = new ArrayList();// to store Students data
-
+		ArrayList<String> stringArray = (ArrayList) IO.read("src/planner/db/students.txt");
+		
 		for (int i = 0; i < stringArray.size(); i++) {
 			String st = (String) stringArray.get(i);
 			
@@ -34,13 +36,13 @@ public class StudentData {
 			Student std = new Student(firstName, lastName, matricNum, gender, nationality, accessStart, accessEnd);
 			
 			// add to Students list
-			alr.add(std);
+			studentList.add(std);
 		}
-		return alr;
+		return studentList;
 	}
 
 	// an example of saving
-	public static void saveStudents(String filename, List al) throws IOException {
+	public static void saveStudents(List al) throws IOException {
 		List alw = new ArrayList();// to store Studetns data
 
 		for (int i = 0; i < al.size(); i++) {
@@ -62,6 +64,6 @@ public class StudentData {
 
 			alw.add(st.toString());
 		}
-		IO.write(filename, alw);
+		IO.write("src/planner/db/students.txt", alw);
 	}
 }
