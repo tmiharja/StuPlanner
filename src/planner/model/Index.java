@@ -6,10 +6,12 @@ public class Index {
 	
 	private int vacancy;
 	
+	/**
+	 * Boolean attributes to indicate whether or not
+	 * the index has tutorial/ lecture/ lab
+	 */
 	private int isLecture;
-
 	private int isTutorial;
-	
 	private int isLab;
 	
 	Lesson lessonSchedule;
@@ -21,6 +23,7 @@ public class Index {
 		this.isTutorial = isTutorial;
 		this.isLab = isLab;
 	}
+	
 	
 	public int isLecture() {
 		return isLecture;
