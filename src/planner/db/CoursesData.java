@@ -1,94 +1,101 @@
 package planner.db;
 import java.io.IOException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.FileInputStream;
-import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.StringTokenizer;
 
+import planner.manager.DataMgr;
 import planner.model.Course;
 
 public class CoursesData {
+	
 	public static final String SEPARATOR = "|";
+	
+	/**ArrayList to store the course list
+	 */
+	public static ArrayList <Course> CourseList = new ArrayList() ;
 
-    // an example of reading
-	@SuppressWarnings("rawtypes")
-	public static ArrayList readCourses(String filename) throws IOException {
+    /** Initialise the courses before application starts
+     * @param filename
+     * @throws IOException
+     * @throws ParseException 
+     */
+	@SuppressWarnings({ "rawtypes", "unchecked"})
+	public static ArrayList<Course> initCourses() throws IOException, ParseException {
+		
 		// read String from text file
-		ArrayList stringArray = (ArrayList)read(filename);
-		ArrayList alr = new ArrayList() ;// to store Courses data
+		ArrayList<String> stringArray = (ArrayList) DataMgr.read("src/planner/db/courses.txt");
+		
+		Calendar examDate = Calendar.getInstance();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Date examDateD;
 		
         for (int i = 0 ; i < stringArray.size() ; i++) {
-				String st = (String)stringArray.get(i);
-				// get individual 'fields' of the string separated by SEPARATOR
-				StringTokenizer star = new StringTokenizer(st, SEPARATOR);	// pass in the string to the string tokenizer using delimiter "," 
+        	
+				String field = (String) stringArray.get(i);
 				
-				String  courseCode = star.nextToken().trim();	// first token
-				String  courseName = star.nextToken().trim();	// second token
-				int academicUnit = Integer.parseInt(star.nextToken().trim());// third token
-				int index = Integer.parseInt(star.nextToken().trim()); //fourth token
-				String examDate = star.nextToken().trim(); //fifth token
+				// get individual 'fields' of the string separated by SEPARATOR
+				// pass in the string to the string tokenizer using delimiter "," 
+				StringTokenizer tokenizer = new StringTokenizer(field, SEPARATOR);	
+				
+				//first to fifth tokens
+				String  courseCode = tokenizer.nextToken().trim();	
+				String  courseName = tokenizer.nextToken().trim();	
+				int AU = Integer.parseInt(tokenizer.nextToken().trim());
+				String school = tokenizer.nextToken().trim(); 
+				String examDateS = tokenizer.nextToken().trim(); 
+				
+				examDateD = dateFormat.parse(examDateS);
+				examDate.setTime(examDateD);
 	
 				// create Course object from file data
-				Course course = new Course(courseCode, courseName, academicUnit, index, examDate);
+				Course course = new Course(courseCode, courseName, AU, school, examDate);
 				// add to Courses list 
-				alr.add(course) ;
+				CourseList.add(course) ;
 		}
-		return alr ;
+		return CourseList ;
 	}
 
 
 
-// an example of saving
-public static void saveCourses(String filename, List al) throws IOException {
-		List alw = new ArrayList() ;// to store Courses data
+	/** Save the courses that has been added during the session
+	 * @param CourseToUpdate
+	 * @throws IOException
+	 */
+	public static void saveCourses(ArrayList<Course> CourseToUpdate) throws IOException {
+		ArrayList <String> courseListRename = new ArrayList<String>() ;// to store Courses data
 
-        for (int i = 0 ; i < al.size() ; i++) {
-				Course course = (Course)al.get(i);
-				StringBuilder st =  new StringBuilder() ;
-				st.append(course.getCourseCode().trim());
-				st.append(SEPARATOR);
-				st.append(course.getCourseName().trim());
-				st.append(SEPARATOR);
-				st.append(course.getAcademicUnit());
-				st.append(SEPARATOR);
-				st.append(course.getIndex());
-				st.append(SEPARATOR);
-				st.append(course.getExamDate());
-				alw.add(st.toString()) ;
+        for (int i = 0 ; i < CourseToUpdate.size() ; i++) {
+				Course course = (Course) CourseToUpdate.get(i);
+				StringBuilder stringBuild =  new StringBuilder() ;
+				stringBuild.append(course.getCourseCode().trim());
+				stringBuild.append(SEPARATOR);
+				stringBuild.append(course.getCourseName().trim());
+				stringBuild.append(SEPARATOR);
+				stringBuild.append(course.getAU());
+				stringBuild.append(SEPARATOR);
+				stringBuild.append(course.getSchool());
+				stringBuild.append(SEPARATOR);
+				
+				Calendar ExamDate = course.getExamDate();
+				int day = ExamDate.get(Calendar.DAY_OF_MONTH);
+				int month = ExamDate.get(Calendar.MONTH);
+				int year = ExamDate.get(Calendar.YEAR);
+				int hour = ExamDate.get(Calendar.HOUR_OF_DAY);
+			    int minute = ExamDate.get(Calendar.MINUTE);
+			    
+			    String ExamDateS = String.format("%02d/%02d/%4d %02d:%02d", year, month+1, day, hour, minute);
+				
+				stringBuild.append(ExamDateS);
+
+				courseListRename.add(stringBuild.toString()) ;
 			}
-			write(filename,alw);
+			DataMgr.write("src/planner/db/courses.txt",courseListRename);
 	}
 
-  /** Write fixed content to the given file. */
-  public static void write(String fileName, List data) throws IOException  {
-    PrintWriter out = new PrintWriter(new FileWriter(fileName));
-
-    try {
-		for (int i =0; i < data.size() ; i++) {
-      		out.println((String)data.get(i));
-		}
-    }
-    finally {
-      out.close();
-    }
-  }
-
-  /** Read the contents of the given file. */
-  public static List read(String fileName) throws IOException {
-	List data = new ArrayList() ;
-    Scanner scanner = new Scanner(new FileInputStream(fileName));
-    try {
-      while (scanner.hasNextLine()){
-        data.add(scanner.nextLine());
-      }
-    }
-    finally{
-      scanner.close();
-    }
-    return data;
-  }
 }
  
