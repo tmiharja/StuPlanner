@@ -28,8 +28,11 @@ public class StudentMgr {
 	 * @param nationality
 	 * @throws ParseException 
 	 */	
-	public static void addStudent (String firstName, String lastName, String matricNumber, char gender, String nationality, Calendar accessStart, Calendar accessEnd) throws ParseException {
-		Student newStudent = new Student(firstName, lastName, matricNumber, gender, nationality, accessStart, accessEnd);
+	public static void addStudent (String firstName, String lastName, String matricNumber, 
+			char gender, String nationality, int mobileNo, String email, 
+			Calendar accessStart, Calendar accessEnd) throws ParseException {
+		Student newStudent = new Student(firstName, lastName, matricNumber, gender, 
+				nationality, mobileNo, email, accessStart, accessEnd);
 		//students.add((Student) newStudent);
 		//System.out.println("Student of matric no " + matricNumber + " was added to the food menu.");
 		

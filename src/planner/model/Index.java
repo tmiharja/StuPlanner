@@ -2,75 +2,60 @@ package planner.model;
 
 public class Index {
 	
-	private int indexNumber;
-	
+	private String indexNumber;
+	private String courseCode;
 	private int vacancy;
+	private int waitingList;
 	
 	/**
 	 * Boolean attributes to indicate whether or not
 	 * the index has tutorial/ lecture/ lab
 	 */
-	private int isLecture;
-	private int isTutorial;
-	private int isLab;
 	
 	Lesson lessonSchedule;
 	
-	public Index (int indexNumber, int vacancy, int isLecture, int isTutorial, int isLab){
+	public Index (String courseCode, String indexNumber, int vacancy, int waitingList){
+		this.courseCode = courseCode;
 		this.indexNumber = indexNumber;
 		this.vacancy = vacancy;
-		this.isLecture = isLecture;
-		this.isTutorial = isTutorial;
-		this.isLab = isLab;
+		this.waitingList = waitingList;
 	}
-	
-	
-	public int isLecture() {
-		return isLecture;
+	//Course Code
+	public String getCourseCode()
+	{
+		return courseCode;
 	}
-
-	public void setLecture(int isLecture) {
-		this.isLecture = isLecture;
+	public void setCourseCode(String courseCode)
+	{
+		this.courseCode = courseCode;
 	}
-
-	public int isTutorial() {
-		return isTutorial;
-	}
-
-	public void setTutorial(int isTutorial) {
-		this.isTutorial = isTutorial;
-	}
-
-	public Lesson getLessonSchedule() {
-		return lessonSchedule;
-	}
-
-	public void setLessonSchedule(Lesson lessonSchedule) {
-		this.lessonSchedule = lessonSchedule;
-	}
-
-	public int getIndexNumber() {
+	//Index Number
+	public String getIndexNumber()
+	{
 		return indexNumber;
 	}
-
-	public void setIndexNumber(int indexNumber) {
+	public void setIndexNumber(String indexNumber)
+	{
 		this.indexNumber = indexNumber;
 	}
-
-	public int getVacancy() {
+	//Vacancy
+	public int getVacancy()
+	{
 		return vacancy;
 	}
-
-	public void setVacancy(int vacancy) {
+	public void setVacancy(int vacancy)
+	{
 		this.vacancy = vacancy;
 	}
-
-	public int isLab() {
-		return isLab;
+	//Waiting List
+	public int getWaitingList()
+	{
+		return waitingList;
+	}
+	public void setWaitingList(int waitingList)
+	{
+		this.waitingList = waitingList;
 	}
 
-	public void setLab(int isLab) {
-		this.isLab = isLab;
-	}
 
 }

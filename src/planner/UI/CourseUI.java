@@ -39,6 +39,7 @@ public class CourseUI {
 					addNewCourseUI();
 					break;
 				case 2: // Update existing course
+					updateCourseUI();
 					break;
 				case 3: // Remove a course
 					removeCourseUI();
@@ -74,12 +75,14 @@ public class CourseUI {
 		Calendar examDate = CalendarMgr.getValidDateTime("examDate");
 	
 		StaffCourseMgr.addCourse(courseCode, courseName, academicUnit, school, examDate);	
-
 	}
 	
 	private static void removeCourseUI() throws IOException{
 		System.out.print("Enter the course's code:"); String courseCode = sc.nextLine();
 		StaffCourseMgr.removeCourse(courseCode);	
-
+	}
+	
+	private static void updateCourseUI() throws IOException{
+		System.out.print("Enter the course's code:"); String courseCode = sc.nextLine();
 	}
 }

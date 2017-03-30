@@ -30,10 +30,12 @@ public class StudentData {
 			String matricNum = star.nextToken().trim(); // third token
 			char gender = (star.nextToken().trim()).charAt(0); // fourth token
 			String nationality = star.nextToken().trim(); // fifth token
-			Calendar accessStart = CalendarMgr.stringToCalendar(star.nextToken().trim()); // sixth token
-			Calendar accessEnd = CalendarMgr.stringToCalendar(star.nextToken().trim()); // seventh token
+			int mobileNo = Integer.parseInt((star.nextToken().trim())); //sixth token
+			String email = star.nextToken().trim(); // seventh token
+			Calendar accessStart = CalendarMgr.stringToCalendar(star.nextToken().trim()); // eight token
+			Calendar accessEnd = CalendarMgr.stringToCalendar(star.nextToken().trim()); // nine token
 
-			Student std = new Student(firstName, lastName, matricNum, gender, nationality, accessStart, accessEnd);
+			Student std = new Student(firstName, lastName, matricNum, gender, nationality, mobileNo, email, accessStart, accessEnd);
 			
 			// add to Students list
 			studentList.add(std);
@@ -57,6 +59,10 @@ public class StudentData {
 			st.append(std.getGender());
 			st.append(SEPARATOR);
 			st.append(std.getNationality());
+			st.append(SEPARATOR);
+			st.append(std.getMobileNo());
+			st.append(SEPARATOR);
+			st.append(std.getEmail());
 			st.append(SEPARATOR);
 			st.append(CalendarMgr.calendarToString(std.getAccessStart()));
 			st.append(SEPARATOR);

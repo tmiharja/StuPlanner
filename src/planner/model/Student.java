@@ -1,3 +1,4 @@
+
 package planner.model;
 import java.io.IOException;
 import java.text.ParseException;
@@ -22,6 +23,8 @@ public class Student {
 	private String matricNumber;
 	private char gender;
 	private String nationality; 
+	private int mobileNo;
+	private String email;
 	private Calendar accessStart;
 	private Calendar accessEnd; 
 	private ArrayList courselist;
@@ -29,12 +32,14 @@ public class Student {
 	private static final String filename = "student.txt";
 	
 	//constructor
-	public Student (String firstName, String lastName, String matricNumber, char gender, String nationality, Calendar accessStart, Calendar accessEnd) {
+	public Student (String firstName, String lastName, String matricNumber, char gender, String nationality, int mobileNo, String email, Calendar accessStart, Calendar accessEnd) {
 		this.firstName 			= firstName;
 		this.lastName 			= lastName;
 		this.matricNumber		= matricNumber;
 		this.gender				= gender;
 		this.nationality		= nationality;
+		this.mobileNo           = mobileNo;
+		this.email              = email;
 		this.accessStart 		= accessStart;
 		this.accessEnd 			= accessEnd;
 	}
@@ -72,8 +77,24 @@ public class Student {
 		studentlist = StudentData.initStudents();
 		return studentlist;
 	}
+	
+	public int getMobileNo() {
+		return mobileNo;
+	}
 
+	public String getEmail() {
+		return email;
+	}
+	
 	//setters
+	public void setMobileNo(int mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	public void setAccessStart(Calendar accessStart) {
 		this.accessStart = accessStart;
 	}
@@ -155,11 +176,11 @@ public class Student {
 		}	
 	}
 	
-	public void addStudent(String fn, String ln,String mt, char c, String nt, Calendar std, Calendar ed) throws ParseException{
+	public void addStudent(String fn, String ln,String mt, char c, String nt, int mobileNo, String email, Calendar std, Calendar ed) throws ParseException{
 		try {	
 			// read file containing Student records.
 			ArrayList al = getStudentList();
-			Student st = new Student(fn, ln,mt, c, nt, std, ed);
+			Student st = new Student(fn, ln,mt, c, nt, mobileNo, email, std, ed);
 			al.add(st);
 			setStudentList(al);
 		}catch (IOException error) {
@@ -167,11 +188,11 @@ public class Student {
 		}
 	}
 	
-	public void removeStudent(String fn, String ln, String mt, char c, String nt, Calendar std, Calendar ed) throws ParseException{
+	public void removeStudent(String fn, String ln, String mt, char c, String nt, int mobileNo, String email, Calendar std, Calendar ed) throws ParseException{
 		try {	
 			// read file containing Student records.
 			ArrayList al = getStudentList();
-			Student st = new Student(fn, ln, mt, c, nt, std, ed);
+			Student st = new Student(fn, ln, mt, c, nt, mobileNo, email, std, ed);
 			al.remove(st);
 			setStudentList(al);
 			
