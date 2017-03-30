@@ -64,17 +64,18 @@ public class CourseUI {
 	 * Show a UI to add a new course
 	 * done by the Staff
 	 * @throws IOException 
+	 * @throws ParseException 
 	 */
-	private static void addNewCourseUI() throws IOException{
-		System.out.print("Enter the course's code:"); String courseCode = sc.nextLine();
-		System.out.print("Enter the course's name:"); String courseName = sc.nextLine();
-		System.out.print("Enter the number of AUs:"); int academicUnit = sc.nextInt();
+	private static void addNewCourseUI() throws IOException, ParseException{
+		System.out.print("Enter the course's code: "); String courseCode = sc.nextLine();
+		System.out.print("Enter the course's name: "); String courseName = sc.nextLine();
+		System.out.print("Enter the number of AUs: "); int academicUnit = sc.nextInt();
 		sc.nextLine();
-		System.out.print("Enter the school that offers the course (eg: SCE):"); String school= sc.nextLine();
-		
+		System.out.print("Enter the school that offers the course (eg: SCE): "); String school= sc.nextLine();
+		System.out.print("Enter the course's type: "); String courseType = sc.nextLine();
 		Calendar examDate = CalendarMgr.getValidDateTime("examDate");
 	
-		StaffCourseMgr.addCourse(courseCode, courseName, academicUnit, school, examDate);	
+		StaffCourseMgr.addCourse(courseCode, courseName, academicUnit, school, courseType, examDate);	
 	}
 	
 	private static void removeCourseUI() throws IOException{
@@ -84,5 +85,6 @@ public class CourseUI {
 	
 	private static void updateCourseUI() throws IOException{
 		System.out.print("Enter the course's code:"); String courseCode = sc.nextLine();
+
 	}
 }

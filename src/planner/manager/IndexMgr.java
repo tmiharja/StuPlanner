@@ -1,29 +1,29 @@
 package planner.manager;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import planner.db.CourseData;
 import planner.db.IndexesData;
 import planner.model.Course;
-import planner.model.CourseList;
 import planner.model.Index;
-import planner.model.IndexList;
 
 
 public class IndexMgr {
-	static ArrayList<Index> indexList = IndexList.getIndexList();
+	private static ArrayList<Index> newIndexList = new ArrayList<Index>();
 	/**
 	 * Create a new index specific to the course
 	 * @throws IOException 
+	 * @throws ParseException 
 
 	 */	
-	public static Index addIndex (String courseCode, String indexNumber, int vacancy, int waitingList) throws IOException  {
-		
-		Index newIndex = new Index(courseCode.toUpperCase(), indexNumber, vacancy, waitingList);
-		indexList.add((Index) newIndex);
+	public static Index addIndex (String courseCode, int indexNumber, String tutorialGroup, int vacancy, int waitingList) throws IOException, ParseException  {
+		Index newIndex = new Index(courseCode.toUpperCase(), indexNumber, tutorialGroup, vacancy, waitingList);
+		newIndexList = IndexesData.initIndexes();
+		newIndexList.add(newIndex);
 			
-		IndexesData.saveIndexes(indexList);
+		IndexesData.saveIndexes(newIndexList);
 		System.out.println("Index " + courseCode + " (" + indexNumber + ") has been successfully added!");
 		
 		return newIndex;

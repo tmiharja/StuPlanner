@@ -26,7 +26,7 @@ public class Course {
 	/**
 	 * The list of indexes for the course that the student can register to
 	 */
-	private IndexList indexList = new IndexList();
+	private String courseType;
 	
 	/** The exam date of the module
 	 */
@@ -39,12 +39,13 @@ public class Course {
 
 	/** Constructor for Course
 	 */
-	public Course (String courseCode, String courseName, int AU, String school, Calendar examDate) {
+	public Course (String courseCode, String courseName, int au, String school, String courseType, Calendar examDate) {
 		this.courseCode			= courseCode;
 		this.courseName			= courseName;
-		this.AU					= AU;
+		this.AU					= au;
 		this.school				= school;
 		this.examDate			= examDate;
+		this.courseType			= courseType;
 	}
 	
 	
@@ -86,18 +87,17 @@ public class Course {
 	public void setSchool(String school) {
 		this.school = school;
 	}
-
+	
+	public String getCourseType() {
+		return courseType;
+	}
+	
+	public void setCourseType(String courseType) {
+		this.courseType = courseType;
+	}
+	
 	public void setExamDate(Calendar examDate){
 		this.examDate = examDate;
-	}
-
-
-	public IndexList getIndexList() {return indexList;
-	}
-
-
-	public void setIndexList(IndexList indexList) {
-		this.indexList = indexList;
 	}
 	
 	public boolean equals(Object o) {

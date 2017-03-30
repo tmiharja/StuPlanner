@@ -4,18 +4,18 @@ import java.io.IOException;
 import java.text.*;
 import java.util.*;
 
+import planner.db.CourseData;
 import planner.db.IndexesData;
 import planner.manager.AccountMgr;
 import planner.manager.CalendarMgr;
 import planner.manager.IndexMgr;
+import planner.manager.LessonMgr;
 import planner.manager.PrintMgr;
 import planner.manager.StaffCourseMgr;
 import planner.manager.StudentMgr;
 import planner.manager.UserValidationMgr;
 import planner.model.Course;
-import planner.model.CourseList;
 import planner.model.Index;
-import planner.model.IndexList;
 
 public class IndexUI {
 	
@@ -65,29 +65,38 @@ public class IndexUI {
 		}
 	}
 	
-	private static void addNewIndexUI() throws IOException{
-		ArrayList<Course> courseList = CourseList.getCourseList();
-		ArrayList<Index> indexList = IndexList.getIndexList() ;
-		
-		System.out.print("Enter the course's code:"); String courseCode = sc.nextLine();
-		System.out.print("Enter the index number:"); String indexNumber = sc.next();
+	private static void addNewIndexUI() throws IOException, ParseException{		
+		System.out.print("Enter the course's code: "); String courseCode = sc.nextLine();
+		System.out.print("Enter the index number: "); int indexNumber = sc.nextInt();
 		sc.nextLine();
-		System.out.print("Enter the index vacancy:"); int vacancy = sc.nextInt();
+		System.out.print("Enter the tutorial group: "); String tutorialGroup = sc.nextLine();
+		System.out.print("Enter the index vacancy: "); int vacancy = sc.nextInt();
 		sc.nextLine();
-		System.out.print("Enter the index waiting list:"); int waitingList = sc.nextInt();
+		System.out.print("Enter the index waiting list: "); int waitingList = sc.nextInt();
 		sc.nextLine();
 		
-		IndexMgr.addIndex(courseCode, indexNumber , vacancy, waitingList);
+		System.out.print("Enter number of lessons: "); int noOfLesson = sc.nextInt();
+		sc.nextLine();
+		
+		for (int i = 0; i < noOfLesson; i++){
+			System.out.print("Enter the lesson type (LAB/TUT/LEC): "); String lessonType = sc.nextLine();
+			System.out.print("Enter the lesson day (e.g. MON/TUE/WED): "); String lessonDay = sc.nextLine();
+			System.out.print("Enter the lesson time (e.g. 1330-1430): "); String lessonTime = sc.nextLine();
+			System.out.print("Enter the lesson venue (e.g. LT2A): "); String lessonVenue = sc.nextLine();
+			LessonMgr.addLesson(indexNumber, lessonType, lessonDay, lessonTime, lessonVenue);
+		}
+		
+		IndexMgr.addIndex(courseCode, indexNumber, tutorialGroup, vacancy, waitingList);
 	}
 	
-	private static void Vacancy() throws IOException
+	private static void Vacancy() throws IOException, ParseException
 	{	
 		int indexNumber;
 		int choice,t=0;
 		Course courseToUpdate;
 		Index newIndex;
-		ArrayList<Course> courseList = CourseList.getCourseList();
-		ArrayList<Index> indexList = IndexList.getIndexList() ;
+		ArrayList<Course> courseList = CourseData.initCourses();
+		ArrayList<Index> indexList = IndexesData.initIndexes() ;
 		
 		PrintMgr.printCourseList();
 		System.out.println("\nSelect the course:");

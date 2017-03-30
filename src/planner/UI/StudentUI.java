@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Scanner;
 
 import planner.manager.PrintMgr;
+import planner.manager.StudentCourseMgr;
 import planner.manager.StudentMgr;
 import planner.model.Student;
 import planner.model.StudentList;
@@ -47,7 +48,7 @@ public class StudentUI {
 				choice = Integer.parseInt(sc.nextLine());
 				switch (choice) {
 				case 1: // Register Course
-					
+					StudentCourseMgr.registerCourse();
 					break;
 				case 2: // Drop Course
 

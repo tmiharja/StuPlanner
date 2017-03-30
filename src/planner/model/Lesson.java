@@ -1,42 +1,61 @@
 package planner.model;
 
-import java.util.Calendar;
-
 public class Lesson {
-	/**
-	 * The venue of the lesson
-	 */
-	protected String venue;
+	private int indexNumber; 
+	private String lessonType;
+	private String lessonDay;
+	private String lessonVenue;
+	private String lessonTime;
 	
-	/**
-	 * The time of the lesson
-	 */
-	protected Calendar lessonStart;
-	protected Calendar lessonEnd;
+	public Lesson (int indexNumber, String lessonType, String lessonDay, String lessonTime, String lessonVenue){
+		this.indexNumber = indexNumber;
+		this.lessonType = lessonType;
+		this.lessonDay = lessonDay;
+		this.lessonTime = lessonTime;
+		this.lessonVenue = lessonVenue;
+	}
+
+	public int getIndexNumber() {
+		return indexNumber;
+	}
+
+	public void setIndexNumber(int indexNumber) {
+		this.indexNumber = indexNumber;
+	}
+
+	public String getLessonType() {
+		return lessonType;
+	}
+
+	public void setLessonType(String lessonType) {
+		this.lessonType = lessonType;
+	}
+
+	public String getLessonDay() {
+		return lessonDay;
+	}
+
+	public void setLessonDay(String lessonDay) {
+		this.lessonDay = lessonDay;
+	}
+
+	public String getLessonVenue() {
+		return lessonVenue;
+	}
+
+	public void setLessonVenue(String lessonVenue) {
+		this.lessonVenue = lessonVenue;
+	}
+
+	public String getLessonTime() {
+		return lessonTime;
+	}
+
+	public void setLessonTime(String lessonTime) {
+		this.lessonTime = lessonTime;
+	}
 	
-
-	public Calendar getLessonStart() {
-		return lessonStart;
+	public boolean equals(int o) {
+		return getIndexNumber() == o;
 	}
-
-	public void setLessonStart(Calendar lessonStart) {
-		this.lessonStart = lessonStart;
-	}
-
-	public Calendar getLessonEnd() {
-		return lessonEnd;
-	}
-
-	public void setLessonEnd(Calendar lessonEnd) {
-		this.lessonEnd = lessonEnd;
-	}
-
-	public String getVenue() {
-		return venue;
-	}
-
-	public void setVenue(String venue) {
-		this.venue = venue;
-	}
-
 }

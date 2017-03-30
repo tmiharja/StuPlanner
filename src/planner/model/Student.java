@@ -151,11 +151,11 @@ public class Student {
 	  }
 	
 	
-	public void addCourse(String cc, String cn, int au,String s, Calendar e) throws ParseException{
+	public void addCourse(String cc, String cn, int au,String s,String ct, Calendar e) throws ParseException{
 		try {	
 			// read file containing Student records.
 			ArrayList al = getCourseList();
-			Course course = new Course(cc,cn,au,s,e);
+			Course course = new Course(cc,cn,au,s,ct,e);
 			al.add(course);
 			setCourseList(al);
 		}catch (IOException error) {
@@ -163,11 +163,11 @@ public class Student {
 		}
 	}
 	
-	public void dropCourse(String cc, String cn, int au, String s, Calendar e) throws ParseException{
+	public void dropCourse(String cc, String cn, int au, String s,String ct, Calendar e) throws ParseException{
 		try {	
 			// read file containing Student records.
 			ArrayList al = getCourseList();
-			Course course = new Course(cc,cn,au,s,e);
+			Course course = new Course(cc,cn,au,s,ct,e);
 			al.remove(course);
 			setCourseList(al);
 			

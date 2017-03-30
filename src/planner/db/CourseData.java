@@ -13,7 +13,7 @@ public class CourseData {
 	
 	/**ArrayList to store the course list
 	 */
-	public static ArrayList <Course> CourseList = new ArrayList() ;
+
 
     /** Initialise the courses before application starts
      * @param filename
@@ -22,7 +22,7 @@ public class CourseData {
      */
 	@SuppressWarnings({ "rawtypes", "unchecked"})
 	public static ArrayList<Course> initCourses() throws IOException, ParseException {
-		
+		ArrayList <Course> CourseList = new ArrayList() ;
 		// read String from text file
 		ArrayList<String> stringArray = (ArrayList) IO.read("src/planner/db/courses.txt");
 		
@@ -43,13 +43,14 @@ public class CourseData {
 				String  courseName = tokenizer.nextToken().trim();	
 				int AU = Integer.parseInt(tokenizer.nextToken().trim());
 				String school = tokenizer.nextToken().trim(); 
+				String courseType = tokenizer.nextToken().trim();
 				String examDateS = tokenizer.nextToken().trim(); 
 				
 				examDateD = dateFormat.parse(examDateS);
 				examDate.setTime(examDateD);
 	
 				// create Course object from file data
-				Course course = new Course(courseCode, courseName, AU, school, examDate);
+				Course course = new Course(courseCode, courseName, AU, school,courseType, examDate);
 				// add to Courses list 
 				CourseList.add(course) ;
 		}
@@ -75,6 +76,8 @@ public class CourseData {
 				stringBuild.append(course.getAU());
 				stringBuild.append(SEPARATOR);
 				stringBuild.append(course.getSchool());
+				stringBuild.append(SEPARATOR);
+				stringBuild.append(course.getCourseType());
 				stringBuild.append(SEPARATOR);
 				
 				Calendar ExamDate = course.getExamDate();

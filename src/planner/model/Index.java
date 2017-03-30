@@ -2,8 +2,9 @@ package planner.model;
 
 public class Index {
 	
-	private String indexNumber;
+	private int indexNumber;
 	private String courseCode;
+	private String tutorialGroup;
 	private int vacancy;
 	private int waitingList;
 	
@@ -12,11 +13,10 @@ public class Index {
 	 * the index has tutorial/ lecture/ lab
 	 */
 	
-	Lesson lessonSchedule;
-	
-	public Index (String courseCode, String indexNumber, int vacancy, int waitingList){
+	public Index (String courseCode, int indexNumber, String tutorialGroup, int vacancy, int waitingList){
 		this.courseCode = courseCode;
 		this.indexNumber = indexNumber;
+		this.tutorialGroup = tutorialGroup;
 		this.vacancy = vacancy;
 		this.waitingList = waitingList;
 	}
@@ -30,13 +30,22 @@ public class Index {
 		this.courseCode = courseCode;
 	}
 	//Index Number
-	public String getIndexNumber()
+	public int getIndexNumber()
 	{
 		return indexNumber;
 	}
-	public void setIndexNumber(String indexNumber)
+	public void setIndexNumber(int indexNumber)
 	{
 		this.indexNumber = indexNumber;
+	}
+	// Tutorial Group
+	public String getTutorialGroup()
+	{
+		return tutorialGroup;
+	}
+	public void setTutorialGroup(String tutorialGroup)
+	{
+		this.tutorialGroup = tutorialGroup;
 	}
 	//Vacancy
 	public int getVacancy()
@@ -56,6 +65,9 @@ public class Index {
 	{
 		this.waitingList = waitingList;
 	}
-
+	
+	public boolean equals(int o) {
+		return getIndexNumber() == o;
+	}
 
 }

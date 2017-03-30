@@ -1,9 +1,12 @@
 package planner.manager;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
+import planner.db.CourseData;
+import planner.db.IndexesData;
 import planner.model.Course;
-import planner.model.CourseList;
 import planner.model.Index;
 import planner.model.Student;
 import planner.model.StudentList;
@@ -37,9 +40,11 @@ public class PrintMgr {
 	/**
 	 * Print out all the courses on the Course List
 	 * from index 0 to the end of the array
+	 * @throws ParseException 
+	 * @throws IOException 
 	 */
-	public static void printCourseList(){
-		ArrayList<Course> courses = CourseList.getCourseList();
+	public static void printCourseList() throws IOException, ParseException{
+		ArrayList<Course> courses = CourseData.initCourses();
 		if(courses.size() <= 0){
 			System.out.println("There are no course in the list.");
 			return;
@@ -55,10 +60,12 @@ public class PrintMgr {
 	/**
 	 * Print out all the indexes of a course
 	 * from index 0 to the end of the array
+	 * @throws ParseException 
+	 * @throws IOException 
 	 */
-	public static void printIndexList(Course course){
+	public static void printIndexList(Course course) throws IOException, ParseException{
 		
-		ArrayList<Index> indexList = (course.getIndexList()).getIndexList();
+		ArrayList<Index> indexList = IndexesData.initIndexes();
 		if(indexList.size() <= 0){
 			System.out.println("There is no index for this course.");
 			return;

@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.StringTokenizer;
 
 import planner.model.Course;
-import planner.model.CourseList;
 import planner.model.Index;
 
 public class IndexesData {
@@ -22,13 +21,12 @@ public class IndexesData {
      */
 	@SuppressWarnings({ "rawtypes", "unchecked"})
 	
-	public static ArrayList <Index> IndexList = new ArrayList() ;
 	
 	public static ArrayList<Index> initIndexes() throws IOException, ParseException {
 		
 		// read String from text file
 		ArrayList<String> stringArray = (ArrayList) IO.read("src/planner/db/indexes.txt");
-		
+		ArrayList <Index> indexList = new ArrayList() ;
 		
         for (int i = 0 ; i < stringArray.size() ; i++) {
         	
@@ -40,20 +38,21 @@ public class IndexesData {
 				
 				//first to fifth tokens
 				String  courseCode = tokenizer.nextToken().trim();	
-				String  indexNumber = tokenizer.nextToken().trim();	
+				int  indexNumber = Integer.parseInt(tokenizer.nextToken().trim());	
+				String tutorialGroup = tokenizer.nextToken().trim();	
 				int vacancies = Integer.parseInt(tokenizer.nextToken().trim());
 				int waitingList = Integer.parseInt(tokenizer.nextToken().trim());
 				
 				// create Course object from file data
-				Index index = new Index(courseCode, indexNumber, vacancies, waitingList);
+				Index index = new Index(courseCode, indexNumber, tutorialGroup, vacancies, waitingList);
 				// add to Courses list 
-				IndexList.add(index) ;
+				indexList.add(index) ;
 		}
-		return IndexList ;
+		return indexList ;
 	}
 
 	
-	public static void searchVacancy(String CourseCode,String indexNumber)throws IOException
+	public static void searchVacancy(String CourseCode,int indexNumber)throws IOException
 	{
 		ArrayList<String> stringArray = (ArrayList) IO.read("src/planner/db/indexes.txt");
 		for (int i = 0 ; i < stringArray.size() ; i++) {
@@ -66,13 +65,13 @@ public class IndexesData {
 			
 			//first to fifth tokens
 			String  courseCode = tokenizer.nextToken().trim();	
-			String  indexNumber1 = tokenizer.nextToken().trim();	
+			int  indexNumber1 = Integer.parseInt(tokenizer.nextToken().trim());	
 			int vacancies = Integer.parseInt(tokenizer.nextToken().trim());
 			int waitingList = Integer.parseInt(tokenizer.nextToken().trim());
 			
 			if(courseCode.equalsIgnoreCase(CourseCode))
 			{
-				if(indexNumber.equals( indexNumber1))
+				if(indexNumber == indexNumber1)
 				System.out.println("Index Number: "+indexNumber1+" \t Vacancies: "+vacancies);
 			}
 		}
@@ -117,7 +116,9 @@ public class IndexesData {
 					StringBuilder stringBuild =  new StringBuilder() ;
 					stringBuild.append(index.getCourseCode().trim());
 					stringBuild.append(SEPARATOR);
-					stringBuild.append(index.getIndexNumber().trim());
+					stringBuild.append(index.getIndexNumber());
+					stringBuild.append(SEPARATOR);
+					stringBuild.append(index.getTutorialGroup());
 					stringBuild.append(SEPARATOR);
 					stringBuild.append(index.getVacancy());
 					stringBuild.append(SEPARATOR);
