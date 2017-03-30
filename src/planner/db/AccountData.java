@@ -12,16 +12,16 @@ import planner.model.Student;
 public class AccountData {
 	public static final String SEPARATOR = "|";
 
-	// an example of reading
+	//read account data 
 	public static ArrayList readAccounts(String filename) throws IOException {
 		// read String from text file
 		ArrayList stringArray = (ArrayList) IO.read(filename);
-		ArrayList alr = new ArrayList();// to store Professors data
+		ArrayList alr = new ArrayList();// to store account data
 
 		for (int i = 0; i < stringArray.size(); i++) {
 			String st = (String) stringArray.get(i);
 			// get individual 'fields' of the string separated by SEPARATOR
-			// pass in the string to the string tokenizer using delimiter ","
+			// pass in the string to the string tokenizer using delimiter "|"
 			StringTokenizer star = new StringTokenizer(st, SEPARATOR);
 
 			String username = star.nextToken().trim(); // first token
@@ -36,9 +36,9 @@ public class AccountData {
 		return alr;
 	}
 
-	// an example of saving
+	// save new entry 
 	public static void saveAccounts(String filename, List al) throws IOException {
-		List alw = new ArrayList();// to store Professors data
+		List alw = new ArrayList(); 
 
 		for (int i = 0; i < al.size(); i++) {
 			Account acc = (Account) al.get(i);
