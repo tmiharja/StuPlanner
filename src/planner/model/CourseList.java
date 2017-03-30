@@ -2,11 +2,11 @@ package planner.model;
 
 import java.util.ArrayList;
 
-import planner.db.CoursesData;
+import planner.db.CourseData;
 
 public class CourseList {
 	
-	public static ArrayList<Course> CourseList = CoursesData.CourseList;
+	public static ArrayList<Course> CourseList = CourseData.CourseList;
 
 	public static ArrayList<Course> getCourseList() {
 		return CourseList;
@@ -16,5 +16,4 @@ public class CourseList {
 		CourseList = courseList;
 	}
 	
-
 }

@@ -44,7 +44,7 @@ public class StaffUI {
 			System.out.println("Please select an action:");
 			System.out.println("(1) Edit student access period");
 			System.out.println("(2) Add a student");
-			System.out.println("(3) Add a course");
+			System.out.println("(3) Add/Update a course");
 			System.out.println("(4) Add an index to a course");
 			System.out.println("(5) Check available (vacancy) slot for an index number");
 			System.out.println("(6) Print student list by index number");
@@ -64,7 +64,7 @@ public class StaffUI {
 					System.out.println();
 					break;
 				case 3: // Add/Update a course
-					addCourseUI();
+					CourseUI.addUpdateCourseUI();
 					break;
 					
 				case 4: // Add an index to a course
@@ -138,24 +138,6 @@ public class StaffUI {
 	}
 	
 	/**
-	 * Show a UI to add a new course
-	 * done by the Staff
-	 * @throws IOException 
-	 */
-	private static void addCourseUI() throws IOException{
-		System.out.print("Enter the course's code:"); String courseCode = sc.nextLine();
-		System.out.print("Enter the course's name:"); String courseName = sc.nextLine();
-		System.out.print("Enter the number of AUs:"); int AU = sc.nextInt();
-		sc.nextLine();
-		System.out.print("Enter the school that offers the course (eg: SCE):"); String school= sc.nextLine();
-		
-		Calendar examDate = CalendarMgr.getValidDateTime("examDate");
-	
-		StaffCourseMgr.addCourse(courseCode, courseName, AU, school, examDate);	
-
-	}
-	
-	/**
 	 * Show a UI to add a new index to a course
 	 * done by the Staff
 	 * @throws IOException 
@@ -194,11 +176,8 @@ public class StaffUI {
 		}
 		if (isLab == 1){
 			
-		}
-		
+		}	
 		PrintMgr.printIndexList(courseToUpdate);
-
-	 
         
 	}
 }

@@ -8,7 +8,7 @@ import planner.UI.StaffUI;
 import planner.UI.StudentUI;
 import planner.db.PlannerData;
 import planner.db.StudentData;
-import planner.db.CoursesData;
+import planner.db.CourseData;
 import planner.manager.UserValidationMgr;
 import planner.model.Account;
 
@@ -18,7 +18,7 @@ public class MainApp {
 
 		// TODO Auto-generated method stub
 		StudentData.initStudents();
-		CoursesData.initCourses();
+		CourseData.initCourses();
 		StaffUI.showStaffOption();  
 
 		do {

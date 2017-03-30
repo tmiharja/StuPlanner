@@ -18,7 +18,7 @@ public class CalendarMgr {
 		int year = cal.get(Calendar.YEAR);
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
 		int minute = cal.get(Calendar.MINUTE);
-		return String.format("%02d/%02d/%4d %02d:%02d", year, month + 1, day, hour, minute);
+		return String.format("%02d/%02d/%4d %02d:%02d", day, month + 1, year, hour, minute);
 	}
 	
 	public static Calendar stringToCalendar(String s) throws ParseException {

@@ -1,5 +1,6 @@
 package planner.UI;
 
+import java.io.IOException;
 import java.text.*;
 import java.util.*;
 
@@ -38,10 +39,9 @@ public class CourseUI {
 					addNewCourseUI();
 					break;
 				case 2: // Update existing course
-					
 					break;
 				case 3: // Remove a course
-					
+					removeCourseUI();
 					break;
 				case 4: // Print list of courses
 
@@ -60,21 +60,26 @@ public class CourseUI {
 	}
 	
 	/**
-	 * Show a UI that prompts Staff to add new courses
-	 * @throws ParseException 
+	 * Show a UI to add a new course
+	 * done by the Staff
+	 * @throws IOException 
 	 */
-	private static void addNewCourseUI(){
-		System.out.print("Enter a Course Code: "); String courseCode = sc.nextLine();
-		System.out.print("Enter a Course Name: "); String courseName = sc.nextLine();
-		System.out.print("Enter no. of Academic Unit: "); int academicUnit = Integer.parseInt(sc.nextLine());
-		System.out.print("Enter the Course's School: "); String school = sc.nextLine();
-		System.out.print("Enter the student's gender: "); char gender= sc.next().charAt(0);
+	private static void addNewCourseUI() throws IOException{
+		System.out.print("Enter the course's code:"); String courseCode = sc.nextLine();
+		System.out.print("Enter the course's name:"); String courseName = sc.nextLine();
+		System.out.print("Enter the number of AUs:"); int academicUnit = sc.nextInt();
 		sc.nextLine();
-		System.out.print("Enter the student's nationality: "); String nationality = sc.nextLine();
+		System.out.print("Enter the school that offers the course (eg: SCE):"); String school= sc.nextLine();
 		
-		System.out.print("Enter start access time (dd/MM/yyyy HH:mm): "); 
-		Calendar examDate = CalendarMgr.getValidDateTime(sc.nextLine());
-		
-		//StaffCourseMgr.addCourse(courseCode, courseName, academicUnit, school, examDate);
+		Calendar examDate = CalendarMgr.getValidDateTime("examDate");
+	
+		StaffCourseMgr.addCourse(courseCode, courseName, academicUnit, school, examDate);	
+
+	}
+	
+	private static void removeCourseUI() throws IOException{
+		System.out.print("Enter the course's code:"); String courseCode = sc.nextLine();
+		StaffCourseMgr.removeCourse(courseCode);	
+
 	}
 }

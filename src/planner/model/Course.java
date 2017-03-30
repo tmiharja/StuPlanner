@@ -99,7 +99,13 @@ public class Course {
 	public void setIndexList(IndexList indexList) {
 		this.indexList = indexList;
 	}
-
-
+	
+	public boolean equals(Object o) {
+		if (o instanceof Course) {
+			Course st = (Course)o;
+			return (getCourseCode().equals(st.getCourseCode()));
+		}
+		return false;
+	}
 
 }

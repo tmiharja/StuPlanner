@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import planner.db.CoursesData;
+import planner.db.CourseData;
 import planner.model.Course;
 import planner.model.CourseList;
 
@@ -22,15 +22,22 @@ public class StaffCourseMgr {
 	 * Create a new course with the necessary information
 	 * @throws IOException 
 	 */	
-	public static void addCourse (String courseCode, String courseName, int AU, String school, Calendar examDate) throws IOException {
-		Course newCourse = new Course(courseCode, courseName, AU, school, examDate);
+	public static void addCourse (String courseCode, String courseName, int au, String school, Calendar examDate) throws IOException {
+		Course newCourse = new Course(courseCode.toUpperCase(), courseName, au, school, examDate);
 		courseList.add((Course) newCourse);
 		System.out.println("Course " + courseName + " (" + courseCode + ") has been added!");
 		
 		//Use this before closing!
-		//CoursesData.saveCourses(courseList);
+		CourseData.saveCourses(courseList);
 	}
 	
-	
-
+	public static void removeCourse(String courseCode) throws IOException{
+		for(Course i : courseList){
+			if (i.getCourseCode().equals(courseCode.toUpperCase())){
+				courseList.remove(i);
+				CourseData.saveCourses(courseList);
+				System.out.println("Course " + i.getCourseName() + " (" + courseCode + ") has been removed!");
+			}
+		}
+	}
 }
